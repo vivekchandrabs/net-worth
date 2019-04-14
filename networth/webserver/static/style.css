@@ -1,0 +1,49 @@
+.vertical-menu {
+  height: 100vh;
+}
+
+.vertical-menu a {
+  background-color: #2c3e50;
+  color: white;
+  display: block;
+  padding: 12px;
+  text-decoration: none;
+}
+
+.vertical-menu a:hover {
+  background-color: #c0392b;
+}
+
+.vertical-menu a.active {
+  background-color: #c0392b;
+  color: white;
+}
+
+#menu{
+	background-color: #2c3e50;
+}
+
+#options{
+	float: right;
+}
+
+.dropdown-menu{
+	background-color: #2c3e50; 
+}
+
+.dropdown-item{
+	color: white;
+}
+
+#img{
+	width: 500px;
+	height: 325px;
+	float: center;
+}
+
+.nav-brand-logo {
+  color:white;
+  text-align: center;
+  padding-top:20px;
+}
+
