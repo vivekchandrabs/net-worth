@@ -2,10 +2,12 @@ from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
 
+
 class Category(models.Model):
 
 	title = models.CharField(max_length=100)
 	description = models.TextField()
+	user = models.ForeignKey(User, null=True,on_delete=models.SET_NULL)
 
 class Expense(models.Model):
 
@@ -14,6 +16,7 @@ class Expense(models.Model):
 	description = models.TextField()
 	cost = models.IntegerField(default=0)
 	timestamp = models.DateTimeField(auto_now_add=True)
+	user = models.ForeignKey(User,null=True, on_delete=models.SET_NULL)
 
 class Income(models.Model):
 
@@ -22,3 +25,4 @@ class Income(models.Model):
 	description = models.TextField()
 	money = models.IntegerField(default=0)
 	timestamp = models.DateTimeField(auto_now_add=True)
+	user = models.ForeignKey(User, null=True,on_delete=models.SET_NULL)
