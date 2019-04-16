@@ -1,19 +1,19 @@
 from rest_framework import viewsets
 from rest_framework.response import Response
 from django.shortcuts import render,redirect,HttpResponse
-
+from django.contrib.auth.models import User
 from api.models import Category,Expense,Income
 from api.serializers import CategorySerializer, ExpenseSerializer, IncomeSerializer
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.contrib.auth.decorators import login_required
-import json
+from rest_framework.authtoken.models import Token
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
 
 	queryset = Category.objects.all()
 	serializer_class = CategorySerializer
-	permissions_classes = (IsAuthenticated,)
+	permission_classes = (IsAuthenticated,)
 
 	def create(self,request):
 
@@ -28,6 +28,10 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
 		return redirect('/api/category/')
 
+	def retrieve(self, request):
+
+		return HttpResponse("done")
+
 	def get_queryset(self):
 
 		user = self.request.user
@@ -39,7 +43,7 @@ class ExpenseViewSet(viewsets.ModelViewSet):
 
 	queryset = Expense.objects.all()
 	serializer_class = ExpenseSerializer
-	permissions_classes = [IsAuthenticated,]
+	permission_classes = [IsAuthenticated,]
 
 	def create(self,request):
 		user = request.user
@@ -67,7 +71,7 @@ class IncomeViewSet(viewsets.ModelViewSet):
 
 	queryset = Income.objects.all()
 	serializer_class = IncomeSerializer
-	permissions_classes = [IsAuthenticated,]
+	permission_classes = [IsAuthenticated,]
 
 	def create(self,request):
 		user = request.user
@@ -93,7 +97,7 @@ class IncomeViewSet(viewsets.ModelViewSet):
 
 class MonthExpenseViewSet(viewsets.ModelViewSet):
 	serializer_class = ExpenseSerializer
-	permissions_classes = [IsAuthenticated,]
+	permission_classes = (IsAuthenticated,)
 
 	def get_queryset(self):
 		month = self.request.data['month']
@@ -101,3 +105,16 @@ class MonthExpenseViewSet(viewsets.ModelViewSet):
 		query = Expense.objects.filter(timestamp__month=month)
 		return query
 
+class SignupViewSet(viewsets.ModelViewSet):
+
+	permission_classes = (AllowAny,)
+
+	def create(self,request):
+		username = request.data['username']
+		password = request.data['password']
+		# email = request.data['email']
+
+		user = User.objects.create_user(username = username, password = password)
+		# token = Token.objects.create(user=user)
+		# print(token)
+		return redirect("/signin/")
