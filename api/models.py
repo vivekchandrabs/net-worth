@@ -6,14 +6,16 @@ class Category(models.Model):
 
 	title = models.CharField(max_length=100)
 	description = models.TextField()
+	user = models.ForeignKey(User, blank=True,null=True,on_delete=models.SET_NULL)
 
 class Expense(models.Model):
 
-	categories = models.ForeignKey(Category, null=True,on_delete = models.SET_NULL)
+	categories = models.ForeignKey(Category, default=3, null=True,on_delete = models.SET_NULL)
 	title = models.CharField(max_length=100)
 	description = models.TextField()
 	cost = models.IntegerField(default=0)
 	timestamp = models.DateTimeField(auto_now_add=True)
+	user = models.ForeignKey(User,null=True, on_delete=models.SET_NULL)
 
 class Income(models.Model):
 
@@ -22,3 +24,4 @@ class Income(models.Model):
 	description = models.TextField()
 	money = models.IntegerField(default=0)
 	timestamp = models.DateTimeField(auto_now_add=True)
+	user = models.ForeignKey(User, null=True,on_delete=models.SET_NULL)
