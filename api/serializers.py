@@ -6,7 +6,7 @@ class CategorySerializer(serializers.ModelSerializer):
 	class Meta:
 
 		model = Category
-		fields = ('title', 'description')
+		fields = ('title', 'description',)
 
 class ExpenseSerializer(serializers.ModelSerializer):
 
