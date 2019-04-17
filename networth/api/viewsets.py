@@ -112,9 +112,9 @@ class SignupViewSet(viewsets.ModelViewSet):
 	def create(self,request):
 		username = request.data['username']
 		password = request.data['password']
-		# email = request.data['email']
+		email = request.data['email']
 
-		user = User.objects.create_user(username = username, password = password)
+		user = User.objects.create_user(username = username, email=email, password = password)
 		# token = Token.objects.create(user=user)
 		# print(token)
 		return redirect("/signin/")
