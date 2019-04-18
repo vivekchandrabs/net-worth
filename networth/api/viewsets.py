@@ -60,7 +60,8 @@ class ExpenseViewSet(viewsets.ModelViewSet):
 							user = user
 							)
 		expense.save()
-		return redirect('/api/expense/')
+		ex = ExpenseSerializer(expense)
+		return Response(ex.data)
 
 	def get_queryset(self):
 		user = self.request.user
@@ -117,4 +118,4 @@ class SignupViewSet(viewsets.ModelViewSet):
 		user = User.objects.create_user(username = username, email=email, password = password)
 		# token = Token.objects.create(user=user)
 		# print(token)
-		return redirect("/signin/")
+		return redirect('/dashboard/')
