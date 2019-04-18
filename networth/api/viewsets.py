@@ -3,11 +3,11 @@ from rest_framework.response import Response
 from django.shortcuts import render,redirect,HttpResponse
 from django.contrib.auth.models import User
 from api.models import Category,Expense,Income
-from api.serializers import CategorySerializer, ExpenseSerializer, IncomeSerializer
+from api.serializers import CategorySerializer, ExpenseSerializer, IncomeSerializer, AllMonthSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.contrib.auth.decorators import login_required
 from rest_framework.authtoken.models import Token
-
+import json
 
 class CategoryViewSet(viewsets.ModelViewSet):
 
@@ -27,10 +27,6 @@ class CategoryViewSet(viewsets.ModelViewSet):
 		category.save()
 
 		return redirect('/api/category/')
-
-	def retrieve(self, request):
-
-		return HttpResponse("done")
 
 	def get_queryset(self):
 
@@ -119,3 +115,32 @@ class SignupViewSet(viewsets.ModelViewSet):
 		# token = Token.objects.create(user=user)
 		# print(token)
 		return redirect('/dashboard/')
+
+class AllMonthViewSet(viewsets.ViewSet):
+	permission_classes = (IsAuthenticated,)
+
+	def list(self, request):
+
+		data = {}
+		user = request.user
+		expense = Expense.objects.filter(timestamp__year=2019, user = user)
+		for i in expense:
+			if i.categories.title in data:
+				data[i.categories.title] += i.cost
+			else:
+				data[i.categories.title] = i.cost
+		
+		labels = []
+		dataset = []
+		
+		for key,value in data.items():
+			labels.append(key)
+			dataset.append(value)
+
+		json_data = {}
+		json_data["labels"] = labels
+		json_data["data"] = dataset
+		print("im here")
+		return Response(json_data)
+
+
