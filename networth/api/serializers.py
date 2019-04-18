@@ -23,3 +23,7 @@ class IncomeSerializer(serializers.ModelSerializer):
 		model = Income
 		fields = ('categories', 'title', 'description', 'money')
 		depth = 1
+
+class AllMonthSerializer(serializers.Serializer):
+	labels = serializers.ListField()
+	data = serializers.ListField()
