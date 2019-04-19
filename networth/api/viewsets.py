@@ -143,4 +143,48 @@ class AllMonthViewSet(viewsets.ViewSet):
 		print("im here")
 		return Response(json_data)
 
+class IncomeExpenseViewSet(viewsets.ViewSet):
+	permissions_classes = (IsAuthenticated,)
+
+	def list(self, request):
+		user = request.user
+		income = Income.objects.filter(user = user)
+		expense = Expense.objects.filter(user = user)			
+
+		income_data = {}
+
+
+		for i in income:
+
+			if i.timestamp.month in income_data:
+				income_data[i.timestamp.month] += i.money
+
+			else:
+				income_data[i.timestamp.month] = i.money
+
+		expense_data = {}
+
+		for i in expense:
+
+			if i.timestamp.month in expense_data:
+				expense_data[i.timestamp.month] += i.cost
+
+			else:
+				expense_data[i.timestamp.month] = i.cost
+
+		income_dataset = []
+		for i,key in income_data.items():
+			income_dataset.append(key)
+
+		expense_dataset = []
+		for i,key in expense_data.items():
+			expense_dataset.append(key)
+
+		json_data = {}
+		json_data['income'] = income_dataset
+		json_data['expense'] = expense_dataset
+
+		return Response(json_data)
+
+
 
