@@ -116,6 +116,7 @@ class SignupViewSet(viewsets.ModelViewSet):
 		# print(token)
 		return redirect('/dashboard/')
 
+#for pie chart data in dash board
 class AllMonthViewSet(viewsets.ViewSet):
 	permission_classes = (IsAuthenticated,)
 
@@ -143,6 +144,7 @@ class AllMonthViewSet(viewsets.ViewSet):
 		print("im here")
 		return Response(json_data)
 
+#for bar chart data in dash board
 class IncomeExpenseViewSet(viewsets.ViewSet):
 	permissions_classes = (IsAuthenticated,)
 
@@ -152,7 +154,6 @@ class IncomeExpenseViewSet(viewsets.ViewSet):
 		expense = Expense.objects.filter(user = user)			
 
 		income_data = {}
-
 
 		for i in income:
 
@@ -185,6 +186,80 @@ class IncomeExpenseViewSet(viewsets.ViewSet):
 		json_data['expense'] = expense_dataset
 
 		return Response(json_data)
+
+#pie chart data in expense page.
+class MonthViewSet(viewsets.ViewSet):
+	permission_classes = (IsAuthenticated,)
+
+	def list(self, request):
+
+		data = {}
+		user = request.user
+		expense = Expense.objects.filter(timestamp__month = 4, user = user)
+		for i in expense:
+			if i.categories.title in data:
+				data[i.categories.title] += i.cost
+			else:
+				data[i.categories.title] = i.cost
+		
+		labels = []
+		dataset = []
+		
+		for key,value in data.items():
+			labels.append(key)
+			dataset.append(value)
+
+		json_data = {}
+		json_data["labels"] = labels
+		json_data["data"] = dataset
+		print("im here")
+		return Response(json_data)
+
+#table data in the dash board.
+class TableDataViewSet(viewsets.ViewSet):
+	permissions_classes = (IsAuthenticated,)
+
+	def list(self, request):
+		user = request.user
+
+		expense = Expense.objects.filter(user = user)
+
+
+		label = []
+		for l in expense:
+			if l.categories.title not in label:
+				label.append(l.categories.title)
+
+		data = {}
+		for i in expense:
+
+			if i.categories.title in data:
+				cat = data[i.categories.title]
+
+				if i.timestamp.month in cat:
+					cat[i.timestamp.month] += i.cost
+
+				else:
+
+					cat[i.timestamp.month] = i.cost
+
+				data[i.categories.title] = cat
+
+			else:
+
+				data[i.categories.title] = {i.timestamp.month:i.cost}
+				# data[i.categories.title][i.timestamp.month] = data[i.categories.title][i.timestamp.month].append(i.cost)
+
+		print(data)
+		json_data = {}
+		json_data["labels"] = label
+		json_data["data"] = data
+		return Response(json_data)
+
+
+
+
+
 
 
 
