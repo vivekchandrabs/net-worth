@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from rest_framework.authtoken.models import Token
 import json
 
+#for the add category button and the delete catgory button.
 class CategoryViewSet(viewsets.ModelViewSet):
 
 	queryset = Category.objects.all()
@@ -37,7 +38,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
 		categories = Category.objects.filter(user = user)
 		return categories 
 
-
+#for the add expense button
 class ExpenseViewSet(viewsets.ModelViewSet):
 
 	queryset = Expense.objects.all()
@@ -68,6 +69,7 @@ class ExpenseViewSet(viewsets.ModelViewSet):
 		expense = Expense.objects.filter(user = user)
 		return expense
 
+#for the add income button.
 class IncomeViewSet(viewsets.ModelViewSet):
 
 	queryset = Income.objects.all()
@@ -96,7 +98,7 @@ class IncomeViewSet(viewsets.ModelViewSet):
 		income = Income.objects.filter(user = user)
 		return income
 
-
+#for the edit expense button
 class MonthExpenseViewSet(viewsets.ModelViewSet):
 	serializer_class = ExpenseSerializer
 	permission_classes = (IsAuthenticated,)
