@@ -68,7 +68,7 @@ $.ajax({
 		for(let i of response)
 		{
 			$("#delcategory").append(`
-				<input type="checkbox" name="vehicle1" value=${i.id} id=${checkout}>
+				<input type="checkbox"  value=${i.id} id=${checkout}>
 				<label>${i.title}</label><br>
 				`);
 			checkout = checkout + 1;
@@ -114,7 +114,7 @@ $.ajax({
 			xhr.setRequestHeader("Authorization", "Token " + window.localStorage["token"]);
 	},
 	success: function(response){
-		
+
 		$("#select_category_income").empty();
 		for(let i of response)
 		{
@@ -216,18 +216,96 @@ $("#save_income").on("click", function(){
 			console.log("done")
 		}
 
-	});
-	
+	});	
+
+});
+
+$("#edit_expense").on("click", function(){
+
+	$.ajax({
+
+		method:"GET",
+		url:"/api/expense/",
+		type:"application/json",
+		beforeSend: function(xhr){
+			xhr.setRequestHeader("Authorization", "Token "+ window.localStorage["token"])
+		},
+		success: function(response){
+			$("#edit_exp_cat").empty();
+			$("#edit_exp_title").empty();
+			$("#edit_exp_des").empty();
+			$("#edit_exp_cost").empty();
+			for(let i of response){
+				
+
+				$("#edit_exp_cat").append(`
+					<label for="recipient-name" class="col-form-label">${i.categories.title}</label>
+					<br>
+					`)
+
+				$("#edit_exp_title").append(`
+					<input class="form-control" value="${i.title}">
+					<br>
+					`)
+				$("#edit_exp_des").append(`
+					<input class="form-control" value="${i.description}">
+					<br>
+					`)
+				$("#edit_exp_cost").append(`
+					<input class="form-control" value="${i.cost}">
+					<br>
+					`)
+			
+			}			
+		}
+	})
 
 });
 
 
 
+$("#edit_income").on("click", function(){
 
+	$.ajax({
 
+		method:"GET",
+		url:"/api/income/",
+		type:"application/json",
+		beforeSend: function(xhr){
+			xhr.setRequestHeader("Authorization", "Token "+ window.localStorage["token"])
+		},
+		success: function(response){
+			console.log(response);
+			$("#edit_inc_cat").empty();
+			$("#edit_inc_title").empty();
+			$("#edit_inc_des").empty();
+			$("#edit_inc_cost").empty();
+			for(let i of response){
+				
+				
+				$("#edit_inc_cat").append(`
+					<label for="recipient-name" class="col-form-label">${i.categories.title}</label>
+					<br>
+					`)
 
+				$("#edit_inc_title").append(`
+					<input class="form-control" value="${i.title}">
+					<br>
+					`)
+				$("#edit_inc_des").append(`
+					<input class="form-control" value="${i.description}">
+					<br>
+					`)
+				$("#edit_inc_cost").append(`
+					<input class="form-control" value="${i.cost}">
+					<br>
+					`)
+			
+			}			
+		}
+	})
 
-
+});
 
 
 

@@ -141,14 +141,48 @@
 					</div>
 				</div>
 			</div>
+			<div class="modal fade" id="editexp" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"        aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalCenterTitle">Add Expense</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="row" id="edit_exp">
 
+								<div class="col-md-3" id="edit_exp_cat">
+									
+								</div>
+								<div class="col-md-3" id="edit_exp_title">
+									
+								</div>
+								<div class="col-md-3" id="edit_exp_des">
+									
+								</div>
+								<div class="col-md-3" id="edit_exp_cost">
+									
+								</div>
+								
+							</div>
+							<table id="edit_exp">
+								
+							</table>
 
-
+						</div>
+						<div class="modal-footer">
+							<button type="button" data-dismiss="modal" class="btn btn-primary" id="done">Add</button>
+						</div>
+					</div>
+				</div>
+			</div>
 			<div class="modal fade" id="addinc" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"        aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="">Add Income</h5>
+							<h5 class="modal-title" id="">Edit Income</h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 							</button>
@@ -158,7 +192,7 @@
 								<label class="col-form-label">Select Category:</label>
 								<select class="form-group" style="width:100%" id="select_category_income">
 								</select>
-							</div>				
+							</div>
 							
 							<div class="form-group">
 								<label for="recipient-name" class="col-form-label">Title:</label>
@@ -181,6 +215,40 @@
 					</div>
 				</div>
 			</div>
+			<div class="modal fade" id="editinc" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"        aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="">Edit Income</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-md-3" id="edit_inc_cat">
+
+									
+								</div>
+								<div class="col-md-3" id="edit_inc_title">
+									
+								</div>
+								<div class="col-md-3" id="edit_inc_description">
+									
+								</div>
+								<div class="col-md-3" id="edit_inc_cost">
+									
+								</div>
+							</div>
+							
+						</div>
+						<div class="modal-footer">
+							
+							<button type="button" data-dismiss="modal" id="edit_income" class="btn btn-primary">Save changes</button>
+						</div>
+					</div>
+				</div>
+			</div>
 			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addcat">
 			Add Category
 			</button>
@@ -190,8 +258,14 @@
 			<button type="button" class="btn btn-primary" id="add_expense" data-toggle="modal" data-target="#addexp">
 			Add Expense
 			</button>
+			<button type="button" class="btn btn-primary" id="edit_expense" data-toggle="modal" data-target="#editexp">
+			Edit Expense
+			</button>
 			<button type="button" class="btn btn-primary" id="add_income" data-toggle="modal" data-target="#addinc">
 			Add Income
+			</button>
+			<button type="button" class="btn btn-primary" id="edit_income" data-toggle="modal" data-target="#editinc">
+			Edit Income
 			</button>
 		</div>
 		
