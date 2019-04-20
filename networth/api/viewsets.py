@@ -26,7 +26,10 @@ class CategoryViewSet(viewsets.ModelViewSet):
 							user = user)
 		category.save()
 
-		return redirect('/api/category/')
+		category = CategorySerializer(category)
+		print(category)
+		print(category.data)
+		return Response(category.data)
 
 	def get_queryset(self):
 
@@ -43,12 +46,13 @@ class ExpenseViewSet(viewsets.ModelViewSet):
 
 	def create(self,request):
 		user = request.user
+		print(request.data)
 		title = request.data['title']
 		description = request.data['description']
 		cost = request.data['cost']
 		category_pk = request.data['categories']
-		print(category_pk['id'])
-		category_instance = Category.objects.get(pk = category_pk['id'])
+	
+		category_instance = Category.objects.get(pk = category_pk)
 		expense = Expense(categories = category_instance,
 							title = title,
 							description = description,
@@ -76,7 +80,7 @@ class IncomeViewSet(viewsets.ModelViewSet):
 		description = request.data['description']
 		money = request.data['money']
 		category_pk = request.data['categories']
-		category_instance = Category.objects.get(pk = category_pk['id'])
+		category_instance = Category.objects.get(pk = category_pk)
 
 		income = Income(categories = category_instance,
 						title = title,
@@ -84,7 +88,8 @@ class IncomeViewSet(viewsets.ModelViewSet):
 						money = money,
 						user = user)
 		income.save()
-		return redirect('/api/income/')
+		income = IncomeSerializer(income)
+		return Response(income.data)
 	
 	def get_queryset(self):
 		user = self.request.user
