@@ -1,5 +1,6 @@
 var count = 1;
 var checkout = 1;
+
 $("#add").on('click', function(){
 	
 	
@@ -16,6 +17,7 @@ $("#add").on('click', function(){
 	console.log(count);
 });
 
+// saving the new category
 $("#save_category").on("click", function(){
 
 	for(let i=0;i<count;i++)
@@ -39,14 +41,70 @@ $("#save_category").on("click", function(){
 			},
 			success: function(response)
 			{
-				console.response(response);
+				console.log("done");
 			}
 
 		});
 	}
 	$('#category').empty()
+	$("#description").empty()
+	count = 1;
 
 });
+
+// will fetch all the category of the user to render in the delete category div.
+//for the delete category button
+$("#delete_cat").on("click", function(){
+$.ajax({
+	method: "GET",
+	url:"http://127.0.0.1:8000/api/category/",
+	beforeSend: function(xhr){
+			xhr.setRequestHeader("Authorization", "Token " + window.localStorage["token"]);
+	},
+	success: function(response){
+		$("#delcategory").empty()
+		checkout = 1;
+		console.log("here")
+		for(let i of response)
+		{
+			$("#delcategory").append(`
+				<input type="checkbox" name="vehicle1" value=${i.id} id=${checkout}>
+				<label>${i.title}</label><br>
+				`);
+			checkout = checkout + 1;
+
+		}
+	}
+
+})
+});
+
+// for the add expense button
+$("#add_expense").on("click", function(){
+
+$.ajax({
+	method: "GET",
+	url:"http://127.0.0.1:8000/api/category/",
+	beforeSend: function(xhr){
+			xhr.setRequestHeader("Authorization", "Token " + window.localStorage["token"]);
+	},
+	success: function(response){
+		$("#select_category").empty();
+		for(let i of response)
+		{
+			$("#select_category").append(`
+				
+  					<option value=${i.id}>${i.title}</option>
+			`);
+
+			
+		}
+	}
+
+})
+});
+//for the add income button
+$("#add_income").on("click", function(){
 
 
 $.ajax({
@@ -56,27 +114,163 @@ $.ajax({
 			xhr.setRequestHeader("Authorization", "Token " + window.localStorage["token"]);
 	},
 	success: function(response){
+		
+		$("#select_category_income").empty();
 		for(let i of response)
 		{
-			$("#delcategory").append(`
-				<input type="checkbox" name="vehicle1" value=${i.id} id=${checkout}>
-				<label>${i.title}</label><br>
-				`)
-			checkout = checkout + 1;
+			
+			$("#select_category_income").append(`
+				
+  					<option value=${i.id}>${i.title}</option>
+			`);
 
 		}
 	}
 
 })
+});
 
-
+// delete category
 $("#del_category").on('click', function(){
 
 	for(let i =0; i<checkout; i++){
-		var id = "#"+i
+		var id = "#"+i;
 		if( $(id).prop("checked") == true )
 		{
-			console.log($(id).val());
+			// console.log($(id).val());
+			var url = "/api/category/"+$(id).val()+"/";
+			$.ajax({
+				method:"DELETE",
+				url: url,
+				beforeSend: function(xhr){
+					xhr.setRequestHeader("Authorization", "Token "+ window.localStorage["token"])
+				},
+				success: function(response){
+
+					console.log("done");
+				}
+
+			});			
 		}
 	}
-})
+});
+
+//For add expense modal.
+
+$("#done").on('click', function(){
+	
+	let cat_id = $("#select_category").find(":selected").val();
+	let cost_money = $("#expense_cost").val()
+	let cost_title = $("#expense_title").val()
+	let cost_des = $("#expense_des").val()
+
+	let json_data = {}
+
+	json_data["title"] = cost_title
+	json_data["categories"] = cat_id
+	json_data["cost"] = cost_money
+	json_data["description"] = cost_des
+
+	
+	$.ajax({
+				method:"POST",
+				url: "/api/expense/",
+				type: "application/json",
+				data: json_data,
+				beforeSend: function(xhr){
+					xhr.setRequestHeader("Authorization", "Token "+ window.localStorage["token"])
+				},
+				success: function(response){
+
+					console.log("done")
+				}
+
+			});
+	
+});
+
+
+//saving new income
+$("#save_income").on("click", function(){
+	let cat_id = $("#select_category_income").find(":selected").val();
+	let cost_money = $("#income_money").val()
+	let cost_title = $("#income_title").val()
+	let cost_des = $("#income_des").val()
+
+	let json_data = {};
+	json_data["title"] = cost_title
+	json_data["description"] = cost_des
+	json_data["money"] = cost_money
+	json_data["categories"] = cat_id
+	$.ajax({
+
+		method:"POST",
+		url:"/api/income/",
+		type:"application/json",
+		data: json_data,
+		beforeSend: function(xhr){
+			xhr.setRequestHeader("Authorization", "Token "+ window.localStorage["token"])
+
+		},
+		success: function(response){
+			console.log("done")
+		}
+
+	});
+	
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
