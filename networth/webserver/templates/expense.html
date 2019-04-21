@@ -24,11 +24,11 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarColor01">
 					<ul class="navbar-nav mr-auto">
-						<li class="nav-item active">
-							<a class="nav-link" href="#">Dash-Board <span class="sr-only">(current)</span></a>
-						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Expenses</a>
+							<a class="nav-link" href="#">Dash-Board</a>
+						</li>
+						<li class="nav-item active">
+							<a class="nav-link" href="#">Expenses <span class="sr-only">(current)</span></a>
 						</li>
 						
 					</ul>
@@ -145,35 +145,55 @@
 				<div class="modal-dialog modal-dialog-centered" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalCenterTitle">Add Expense</h5>
+							<h5 class="modal-title" id="exampleModalCenterTitle">Edit Expense</h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
 						<div class="modal-body">
-							<div class="row" id="edit_exp">
+							<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+								<ol class="carousel-indicators">
+									<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+									<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+									<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+									<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
 
-								<div class="col-md-3" id="edit_exp_cat">
-									
+								</ol>
+								<div class="carousel-inner">
+									<div class="carousel-item active">
+										<div class="col-md-3" id="edit_exp_cat">
+											
+										</div>
+									</div>
+									<div class="carousel-item">
+										<div class="col-md-3" id="edit_exp_title">
+											
+										</div>
+									</div>
+									<div class="carousel-item">
+										<div class="col-md-3" id="edit_exp_des">
+											
+										</div>
+									</div>
+									<div class="carousel-item">
+										<div class="col-md-3" id="edit_exp_cost">
+											
+										</div>
+									</div>
 								</div>
-								<div class="col-md-3" id="edit_exp_title">
-									
-								</div>
-								<div class="col-md-3" id="edit_exp_des">
-									
-								</div>
-								<div class="col-md-3" id="edit_exp_cost">
-									
-								</div>
-								
+								<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+									<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+									<span class="sr-only">Previous</span>
+								</a>
+								<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+									<span class="carousel-control-next-icon" aria-hidden="true"></span>
+									<span class="sr-only">Next</span>
+								</a>
 							</div>
-							<table id="edit_exp">
-								
-							</table>
-
+							
 						</div>
 						<div class="modal-footer">
-							<button type="button" data-dismiss="modal" class="btn btn-primary" id="done">Add</button>
+							<button type="button" data-dismiss="modal" class="btn btn-primary" id="edit_expense_save">Add</button>
 						</div>
 					</div>
 				</div>
@@ -227,7 +247,6 @@
 						<div class="modal-body">
 							<div class="row">
 								<div class="col-md-3" id="edit_inc_cat">
-
 									
 								</div>
 								<div class="col-md-3" id="edit_inc_title">
@@ -267,6 +286,18 @@
 			<button type="button" class="btn btn-primary" id="edit_income" data-toggle="modal" data-target="#editinc">
 			Edit Income
 			</button>
+		</div>
+		<br><br>
+		<div class="container">
+			<table class="table" id="all-expenses">
+				<tr>
+					<td>Title</td>
+					<td>Description</td>
+					<td>Cost</td>
+					<td>Category</td>
+					<td>Options</td>
+				</tr>
+			</table>
 		</div>
 		
 		

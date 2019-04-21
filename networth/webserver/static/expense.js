@@ -1,6 +1,29 @@
 var count = 1;
 var checkout = 1;
 
+$(document).ready(function(){
+	$.ajax({
+
+		method:"GET",
+		url:"/api/expense/",
+		beforeSend: function(xhr){
+			xhr.setRequestHeader("Authorization", "Token "+ window.localStorage["token"])
+		},
+		success: function(response) {
+			console.log(response);
+			for (let expense of response) {
+				$('#all-expenses').append(`<tr>
+					<td>${expense.title}</td>
+					<td>${expense.description}</td>
+					<td>${expense.cost}</td>
+					<td>${ expense.categories.title}</td>
+					<td><button class="btn btn-sm btn-success edit-expense id="edit">Edit   </button></td>
+				</tr>`)
+			}
+		}
+	});
+});
+
 $("#add").on('click', function(){
 	
 	
@@ -222,6 +245,18 @@ $("#save_income").on("click", function(){
 
 $("#edit_expense").on("click", function(){
 
+	// let cat_id = $("#select_category").find(":selected").val();
+	// let cost_money = $("#expense_cost").val()
+	// let cost_title = $("#expense_title").val()
+	// let cost_des = $("#expense_des").val()
+
+	// let json_data = {}
+
+	// json_data["title"] = cost_title
+	// json_data["categories"] = cat_id
+	// json_data["cost"] = cost_money
+	// json_data["description"] = cost_des
+
 	$.ajax({
 
 		method:"GET",
@@ -231,13 +266,13 @@ $("#edit_expense").on("click", function(){
 			xhr.setRequestHeader("Authorization", "Token "+ window.localStorage["token"])
 		},
 		success: function(response){
+			console.log(response);
 			$("#edit_exp_cat").empty();
 			$("#edit_exp_title").empty();
 			$("#edit_exp_des").empty();
 			$("#edit_exp_cost").empty();
 			for(let i of response){
-				
-
+				console.log(i)
 				$("#edit_exp_cat").append(`
 					<label for="recipient-name" class="col-form-label">${i.categories.title}</label>
 					<br>
@@ -265,6 +300,7 @@ $("#edit_expense").on("click", function(){
 
 
 $("#edit_income").on("click", function(){
+	
 
 	$.ajax({
 
@@ -281,7 +317,7 @@ $("#edit_income").on("click", function(){
 			$("#edit_inc_des").empty();
 			$("#edit_inc_cost").empty();
 			for(let i of response){
-				
+				console.log(i)
 				
 				$("#edit_inc_cat").append(`
 					<label for="recipient-name" class="col-form-label">${i.categories.title}</label>

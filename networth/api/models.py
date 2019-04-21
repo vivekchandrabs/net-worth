@@ -17,6 +17,9 @@ class Expense(models.Model):
 	timestamp = models.DateTimeField(auto_now_add=True)
 	user = models.ForeignKey(User,null=True, on_delete=models.SET_NULL)
 
+	def __str__(self):
+		return f"{self.title} | {self.user} | {self.categories}"
+
 class Income(models.Model):
 
 	categories = models.ForeignKey(Category, null=True,on_delete = models.SET_NULL)
