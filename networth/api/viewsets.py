@@ -64,9 +64,12 @@ class ExpenseViewSet(viewsets.ModelViewSet):
 		ex = ExpenseSerializer(expense)
 		return Response(ex.data)
 
+
 	def get_queryset(self):
 		user = self.request.user
-		expense = Expense.objects.filter(user = user)
+		print(self.request.data)
+		month = self.request.data["month"]
+		expense = Expense.objects.filter(user = user,timestamp__month=month)
 		return expense
 
 #for the add income button.
@@ -95,7 +98,8 @@ class IncomeViewSet(viewsets.ModelViewSet):
 	
 	def get_queryset(self):
 		user = self.request.user
-		income = Income.objects.filter(user = user)
+		month = self.request.data['month']
+		income = Income.objects.filter(user = user,timestamp__month=month)
 		return income
 
 #for the edit expense button
