@@ -141,63 +141,30 @@
 					</div>
 				</div>
 			</div>
-			<div class="modal fade" id="editexp" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"        aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal fade bd-example-modal-xl" id="editexp" >
+				<div class="modal-dialog modal-xl">
 					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalCenterTitle">Edit Expense</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-								<ol class="carousel-indicators">
-									<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-									<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-									<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-									<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-
-								</ol>
-								<div class="carousel-inner">
-									<div class="carousel-item active">
-										<div class="col-md-3" id="edit_exp_cat">
-											
-										</div>
-									</div>
-									<div class="carousel-item">
-										<div class="col-md-3" id="edit_exp_title">
-											
-										</div>
-									</div>
-									<div class="carousel-item">
-										<div class="col-md-3" id="edit_exp_des">
-											
-										</div>
-									</div>
-									<div class="carousel-item">
-										<div class="col-md-3" id="edit_exp_cost">
-											
-										</div>
-									</div>
-								</div>
-								<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-									<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-									<span class="sr-only">Previous</span>
-								</a>
-								<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-									<span class="carousel-control-next-icon" aria-hidden="true"></span>
-									<span class="sr-only">Next</span>
-								</a>
+						<div class="container">
+							<div style="display: inline-block;">
+								<button style="float:left" onclick="edit_expense(-1)"><span>&#8592;</span></button>
+								<h5 style="text-align:center;padding-top:20px;">Edit Expense</h5>
+								<button style="float:right" onclick="edit_expense(+1)"><span>&#8594;</span></button>
 							</div>
-							
+							<hr style="background-color: white">
+							<div id="edit_exp_div">
+								
+							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="button" data-dismiss="modal" class="btn btn-primary" id="edit_expense_save">Add</button>
+							
+							<button type="button" data-dismiss="modal" class="btn btn-primary">Close</button>
 						</div>
 					</div>
+					
 				</div>
 			</div>
+			
+			
 			<div class="modal fade" id="addinc" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"        aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered" role="document">
 					<div class="modal-content">
@@ -235,37 +202,26 @@
 					</div>
 				</div>
 			</div>
-			<div class="modal fade" id="editinc" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"        aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal fade bd-example-modal-xl" id="editinc" >
+				<div class="modal-dialog modal-xl">
 					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="">Edit Income</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<div class="row">
-								<div class="col-md-3" id="edit_inc_cat">
-									
-								</div>
-								<div class="col-md-3" id="edit_inc_title">
-									
-								</div>
-								<div class="col-md-3" id="edit_inc_description">
-									
-								</div>
-								<div class="col-md-3" id="edit_inc_cost">
-									
-								</div>
+						<div class="container">
+							<div style="display: inline-block;">
+								<button style="float:left" onclick="edit_income(-1)"><span>&#8592;</span></button>
+								<h5 style="text-align:center;padding-top:20px;">Edit Income</h5>
+								<button style="float:right" onclick="edit_income(+1)"><span>&#8594;</span></button>
 							</div>
-							
+							<hr style="background-color: white">
+							<div id="edit_inc_div">
+								
+							</div>
 						</div>
 						<div class="modal-footer">
 							
-							<button type="button" data-dismiss="modal" id="edit_income" class="btn btn-primary">Save changes</button>
+							<button type="button" data-dismiss="modal" class="btn btn-primary">Close</button>
 						</div>
 					</div>
+					
 				</div>
 			</div>
 			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addcat">
@@ -277,13 +233,13 @@
 			<button type="button" class="btn btn-primary" id="add_expense" data-toggle="modal" data-target="#addexp">
 			Add Expense
 			</button>
-			<button type="button" class="btn btn-primary" id="edit_expense" data-toggle="modal" data-target="#editexp">
+			<button type="button" class="btn btn-primary" onclick="edit_expense(0)" data-toggle="modal" data-target="#editexp">
 			Edit Expense
 			</button>
 			<button type="button" class="btn btn-primary" id="add_income" data-toggle="modal" data-target="#addinc">
 			Add Income
 			</button>
-			<button type="button" class="btn btn-primary" id="edit_income" data-toggle="modal" data-target="#editinc">
+			<button type="button" class="btn btn-primary" onclick="edit_income(0)" data-toggle="modal" data-target="#editinc">
 			Edit Income
 			</button>
 		</div>
