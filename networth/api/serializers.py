@@ -13,7 +13,7 @@ class ExpenseSerializer(serializers.ModelSerializer):
 	class Meta:
 
 		model = Expense
-		fields = ('categories', 'title', 'description', 'cost')
+		fields = ('id','categories', 'title', 'description', 'cost')
 		depth = 1
 
 class IncomeSerializer(serializers.ModelSerializer):
@@ -21,7 +21,7 @@ class IncomeSerializer(serializers.ModelSerializer):
 	class Meta:
 
 		model = Income
-		fields = ('categories', 'title', 'description', 'money')
+		fields = ('id','categories', 'title', 'description', 'money')
 		depth = 1
 
 class AllMonthSerializer(serializers.Serializer):
