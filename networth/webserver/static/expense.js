@@ -458,6 +458,44 @@ function edit_inc_function(id,income_id){
 	
 }
 
+$(document).ready(function(){
+	var ctx = $('#pieChart');
+
+	$.ajax({
+		method: "GET",
+		url: "/api/monthexp/",
+		type: "application/json",
+		beforeSend: function(xhr){
+			xhr.setRequestHeader("Authorization", "Token " + window.localStorage["token"]);
+
+		},
+		success: function(response){
+			var myPieChart = new Chart(ctx, {
+    			type: 'doughnut',
+    			data: {
+   				 	labels: response.labels,
+   				 	datasets:[{
+   				 		label: 'Yearly Expense',
+   				 		backgroundColor: 'rgb(255, 99, 132)',
+   				 		borderColor: 'rgb(255, 99, 132)',
+   				 		data: response.data,
+   				 	 	
+   				 	}]
+   				 },
+   				  options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+			});
+		}
+	})
+})
+
 
 
 
