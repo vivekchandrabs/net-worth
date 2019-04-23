@@ -58,8 +58,6 @@ class ExpenseViewSet(viewsets.ModelViewSet):
 	serializer: ExpenseSerializer
 	permission_classes IsAuthenticated.
 	'''
-
-	queryset = Expense.objects.all()
 	serializer_class = ExpenseSerializer
 	permission_classes = [IsAuthenticated,]
 
@@ -82,7 +80,7 @@ class ExpenseViewSet(viewsets.ModelViewSet):
 							description = description,
 							cost = cost,
 							user = user,
-							timestamp = datetime.datetime.now()
+							# timestamp = datetime.datetime.now()
 							)
 		expense.save()
 		ex = ExpenseSerializer(expense)
@@ -94,11 +92,18 @@ class ExpenseViewSet(viewsets.ModelViewSet):
 		:method:GET:
 		returns a list of expenses according to the month given.
 		'''
+		print("here")
 		user = self.request.user
-		print(self.request.data)
+		# print(self.request.data)
 		month = self.request.GET.get("month")
 		expense = Expense.objects.filter(user = user,timestamp__month=month)
 		return expense
+
+	# def partial_update(self, request, pk=None):
+	# 	print(request.data)
+	# 	print(pk)
+
+
 
 #for the add income button.
 class IncomeViewSet(viewsets.ModelViewSet):
@@ -129,7 +134,8 @@ class IncomeViewSet(viewsets.ModelViewSet):
 						description = description,
 						money = money,
 						user = user,
-						timestamp = datetime.datetime.now())
+						# timestamp = datetime.datetime.now()
+						)
 		income.save()
 		income = IncomeSerializer(income)
 		return Response(income.data)

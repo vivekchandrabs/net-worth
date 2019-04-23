@@ -304,23 +304,26 @@ function edit_exp_function(id,expense_id){
 	des_id = "#"+id+"des";
 	cost_id = "#"+id+"cost"
 	
-	var title = ($(title_id).val());
-	var des = ($(des_id).val());
-	var cost = ($(cost_id).val());
-	let json_data = {}
+	var title = $(title_id).val();
+	var des = $(des_id).val();
+	var cost = $(cost_id).val();
+	let json_data = new Object();
 	
-	json_data["title"] = title;
-	json_data["description"] = des;
-	json_data["cost"] = cost;
 
+	json_data['title'] = title;
+	json_data['description'] = des;
+	json_data['cost'] = cost;
+
+	console.log(json_data)
 	url = "/api/expense/"+expense_id+"/"
-	$.ajax({
 
+	$.ajax({
 		method:"PATCH",
 		url: url,
-		type: "application/json",
+		data: "application/json",
 		data: json_data,
 		beforeSend: function(xhr){
+
 			xhr.setRequestHeader("Authorization", "Token "+ window.localStorage["token"])
 		},
 		success: function(response){
