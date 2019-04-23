@@ -8,13 +8,16 @@ class Category(models.Model):
 	description = models.TextField()
 	user = models.ForeignKey(User, blank=True,null=True,on_delete=models.SET_NULL)
 
+	def __str__(self):
+		return f"{self.title} | {self.user}"
+
 class Expense(models.Model):
 
 	categories = models.ForeignKey(Category, default=3, null=True,on_delete = models.SET_NULL)
 	title = models.CharField(max_length=100)
 	description = models.TextField()
 	cost = models.IntegerField(default=0)
-	timestamp = models.DateTimeField(auto_now_add=True)
+	timestamp = models.DateTimeField()
 	user = models.ForeignKey(User,null=True, on_delete=models.SET_NULL)
 
 	def __str__(self):
@@ -26,5 +29,5 @@ class Income(models.Model):
 	title = models.CharField(max_length=100)
 	description = models.TextField()
 	money = models.IntegerField(default=0)
-	timestamp = models.DateTimeField(auto_now_add=True)
+	timestamp = models.DateTimeField()
 	user = models.ForeignKey(User, null=True,on_delete=models.SET_NULL)
