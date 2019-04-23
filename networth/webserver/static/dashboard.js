@@ -1,3 +1,17 @@
+$("#expense").on("click",function(){
+
+	$.ajax({
+
+		beforeSend: function(xhr){
+			xhr.setRequestHeader("Authorization", "Token " + window.localStorage["token"]);
+		},
+		success: function(response){
+			window.location.href("/expense/");
+		}
+	})
+})
+
+
 $(document).ready(function(){
 	var ctx = $('#myChart');
 
@@ -9,14 +23,15 @@ $(document).ready(function(){
 			xhr.setRequestHeader("Authorization", "Token " + window.localStorage["token"]);
 		},
 		success: function(response) {
+			console.log(response);
 			var myPieChart = new Chart(ctx, {
     			type: 'doughnut',
    				 data: {
    				 	 labels: response.labels,
    				 	 datasets:[{
    				 	 	label: 'Yearly Expense',
-   				 	 	backgroundColor: 'rgb(255, 99, 132)',
-   				 	 	borderColor: 'rgb(255, 99, 132)',
+   				 	 	backgroundColor: ["#2980b9","#e74c3c","#8e44ad"],
+   				 	 	borderColor: 'rgb(0, 0, 0)',
    				 	 	data: response.data,
    				 	 	
    				 	 }]

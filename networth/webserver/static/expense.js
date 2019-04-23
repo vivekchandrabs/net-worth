@@ -6,28 +6,6 @@ var date = new Date()
 var current_date = date.getMonth() + 1
 var income_date = date.getMonth() + 1
 
-// $(document).ready(function(){
-// 	$.ajax({
-
-// 		method:"GET",
-// 		url:"/api/expense/",
-// 		beforeSend: function(xhr){
-// 			xhr.setRequestHeader("Authorization", "Token "+ window.localStorage["token"])
-// 		},
-// 		success: function(response) {
-// 			console.log(response);
-// 			for (let expense of response) {
-// 				$('#all-expenses').append(`<tr>
-// 					<td>${expense.title}</td>
-// 					<td>${expense.description}</td>
-// 					<td>${expense.cost}</td>
-// 					<td>${ expense.categories.title}</td>
-// 					<td><button class="btn btn-sm btn-success edit-expense id="edit">Edit   </button></td>
-// 				</tr>`)
-// 			}
-// 		}
-// 	});
-// });
 
 $("#add").on('click', function(){
 	
@@ -263,7 +241,7 @@ function edit_expense(month_number){
 		current_date = month_number + current_date
 	}
 	let data = {}
-	data["month"] = 4
+	data["month"] = current_date
 	console.log(data);
 	console.log(current_date);
 	$.ajax({
@@ -353,7 +331,7 @@ function edit_exp_function(id,expense_id){
 	
 }
 
-
+//edit income button modal.
 function edit_income(month_number){
 	
 
@@ -367,14 +345,16 @@ function edit_income(month_number){
 
 		income_date = month_number + income_date
 	}
-
+	let data = {};
+	data["month"] = income_date;
 	console.log(income_date);
 	$.ajax({
 
 		method:"GET",
 		url:"/api/income/",
 		type:"application/json",
-		data: {"month":4},
+		
+		data: data,
 		beforeSend: function(xhr){
 			xhr.setRequestHeader("Authorization", "Token "+ window.localStorage["token"])
 		},
@@ -424,7 +404,7 @@ function edit_income(month_number){
 
 };
 
-
+// after saving the edited modal.
 function edit_inc_function(id,income_id){
 	title_id = "#"+id+"titlei"
 	des_id = "#"+id+"desi";
@@ -458,43 +438,43 @@ function edit_inc_function(id,income_id){
 	
 }
 
-$(document).ready(function(){
-	var ctx = $('#pieChart');
+// $(document).ready(function(){
+// 	var ctx = $('#pieChart');
 
-	$.ajax({
-		method: "GET",
-		url: "/api/monthexp/",
-		type: "application/json",
-		beforeSend: function(xhr){
-			xhr.setRequestHeader("Authorization", "Token " + window.localStorage["token"]);
+// 	$.ajax({
+// 		method: "GET",
+// 		url: "/api/monthexp/",
+// 		type: "application/json",
+// 		beforeSend: function(xhr){
+// 			xhr.setRequestHeader("Authorization", "Token " + window.localStorage["token"]);
 
-		},
-		success: function(response){
-			var myPieChart = new Chart(ctx, {
-    			type: 'doughnut',
-    			data: {
-   				 	labels: response.labels,
-   				 	datasets:[{
-   				 		label: 'Yearly Expense',
-   				 		backgroundColor: 'rgb(255, 99, 132)',
-   				 		borderColor: 'rgb(255, 99, 132)',
-   				 		data: response.data,
+// 		},
+// 		success: function(response){
+// 			var myPieChart = new Chart(ctx, {
+//     			type: 'doughnut',
+//     			data: {
+//    				 	labels: response.labels,
+//    				 	datasets:[{
+//    				 		label: 'Yearly Expense',
+//    				 		backgroundColor: 'rgb(255, 99, 132)',
+//    				 		borderColor: 'rgb(255, 99, 132)',
+//    				 		data: response.data,
    				 	 	
-   				 	}]
-   				 },
-   				  options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    }
-			});
-		}
-	})
-})
+//    				 	}]
+//    				 },
+//    				  options: {
+//         scales: {
+//             yAxes: [{
+//                 ticks: {
+//                     beginAtZero: true
+//                 }
+//             }]
+//         }
+//     }
+// 			});
+// 		}
+// 	})
+// })
 
 
 
