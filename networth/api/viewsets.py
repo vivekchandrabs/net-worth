@@ -73,6 +73,7 @@ class ExpenseViewSet(viewsets.ModelViewSet):
 		description = request.data['description']
 		cost = request.data['cost']
 		category_pk = request.data['categories']
+		time = request.data['time']
 		
 		category_instance = Category.objects.get(pk = category_pk)
 		expense = Expense(categories = category_instance,
@@ -80,7 +81,7 @@ class ExpenseViewSet(viewsets.ModelViewSet):
 							description = description,
 							cost = cost,
 							user = user,
-							timestamp = datetime.datetime.now()
+							timestamp = time
 							)
 		expense.save()
 		ex = ExpenseSerializer(expense)
@@ -127,6 +128,7 @@ class IncomeViewSet(viewsets.ModelViewSet):
 		description = request.data['description']
 		money = request.data['money']
 		category_pk = request.data['categories']
+		time = request.data["time"]
 		category_instance = Category.objects.get(pk = category_pk)
 
 		income = Income(categories = category_instance,
@@ -134,7 +136,7 @@ class IncomeViewSet(viewsets.ModelViewSet):
 						description = description,
 						money = money,
 						user = user,
-						timestamp = datetime.datetime.now()
+						timestamp = time
 						)
 		income.save()
 		income = IncomeSerializer(income)
@@ -240,6 +242,9 @@ class AllMonthExpenseViewSet(viewsets.ViewSet):
 # pie chart for the dash board // income.
 class AllMonthIncomeViewSet(viewsets.ViewSet):
 
+	'''
+	This viewset will return 
+	'''
 	permission_classes = [IsAuthenticated,]
 
 	def list(self, request):
@@ -272,7 +277,9 @@ class AllMonthIncomeViewSet(viewsets.ViewSet):
 
 #for income bar chart in the dash board.
 class BarChartIncomeViewSet(viewsets.ViewSet):
-
+	'''
+	
+	'''
 	permissions_classes = (IsAuthenticated,)
 
 	def list(self, request):
