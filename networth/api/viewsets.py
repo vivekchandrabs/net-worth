@@ -80,7 +80,7 @@ class ExpenseViewSet(viewsets.ModelViewSet):
 							description = description,
 							cost = cost,
 							user = user,
-							# timestamp = datetime.datetime.now()
+							timestamp = datetime.datetime.now()
 							)
 		expense.save()
 		ex = ExpenseSerializer(expense)
@@ -134,7 +134,7 @@ class IncomeViewSet(viewsets.ModelViewSet):
 						description = description,
 						money = money,
 						user = user,
-						# timestamp = datetime.datetime.now()
+						timestamp = datetime.datetime.now()
 						)
 		income.save()
 		income = IncomeSerializer(income)
@@ -151,7 +151,7 @@ class IncomeViewSet(viewsets.ModelViewSet):
 			month = self.request.GET.get('month')
 		else:
 			month = self.request.data["month"]
-			
+
 		income = Income.objects.filter(user = user,timestamp__month=month)
 		return income
 
@@ -162,13 +162,13 @@ class MonthExpenseViewSet(viewsets.ModelViewSet):
 
 	def get_queryset(self):
 		user = self.request.user
-		print("hereasdsadasd")
+		
 		# print(self.request.data)
 		month = self.request.GET.get('month')
 		print(month)
 		query = Expense.objects.filter(timestamp__month=month, user = user)
 		return query
-
+# for the edit income button.
 class MonthIncomeViewSet(viewsets.ModelViewSet):
 	serializer_class = IncomeSerializer
 	permission_classes = (IsAuthenticated,)
@@ -201,7 +201,7 @@ class SignupViewSet(viewsets.ModelViewSet):
 		# print(token)
 		return redirect('/dashboard/')
 
-#for pie chart data in dash board
+#for pie chart data in dash board// expense
 class AllMonthViewSet(viewsets.ViewSet):
 	'''
 	This is for returning the list of expense.
@@ -237,7 +237,86 @@ class AllMonthViewSet(viewsets.ViewSet):
 		print("im here")
 		return Response(json_data)
 
-#for bar chart data in dash board
+
+class AllMonthExpenseViewSet(viewsets.ViewSet):
+
+	permission_classes = [IsAuthenticated,]
+
+	def list(self, request):
+		'''
+		:method:GET,
+		returns the list of expenses according to the year.
+		'''
+		data = {}
+		user = request.user
+		expense = Income.objects.filter(timestamp__year=2019, user = user)
+		for i in expense:
+			if i.categories.title in data:
+				data[i.categories.title] += i.money
+			else:
+				data[i.categories.title] = i.money
+		
+		labels = []
+		dataset = []
+		
+		for key,value in data.items():
+			labels.append(key)
+			dataset.append(value)
+
+		json_data = {}
+		json_data["labels"] = labels
+		json_data["data"] = dataset
+		print("im here")
+		return Response(json_data)
+
+
+#for income bar chart in the dash board.
+class BarChartIncomeViewSet(viewsets.ViewSet):
+
+	permissions_classes = (IsAuthenticated,)
+
+	def list(self, request):
+
+		months = [0,0,0,0,0,0,0,0,0,0,0,0]
+		labels = []
+		user = request.user
+		income = Income.objects.filter(user = user)
+
+		income_data = {}
+
+		for i in income:
+			m = i.timestamp.month - 1
+			months[m] = months[m] + i.money
+		
+		income_data["data"] = months
+
+		print(income_data)
+		return Response(income_data)
+
+
+# for expense bar chart in the dash board.
+class BarChartExpenseViewSet(viewsets.ViewSet):
+	permissions_classes = (IsAuthenticated,)
+
+	def list(self, request):
+
+		months = [0,0,0,0,0,0,0,0,0,0,0,0]
+		labels = []
+		user = request.user
+		income = Expense.objects.filter(user = user)
+
+		expense_data = {}
+
+		for i in income:
+			m = i.timestamp.month - 1
+			months[m] = months[m] + i.cost
+		
+		expense_data["data"] = months
+
+		print(expense_data)
+		return Response(expense_data)
+
+#for bar chart data in dash board // expense.
 class IncomeExpenseViewSet(viewsets.ViewSet):
 	'''
 	This returns the list of income and expenses of the part
@@ -283,40 +362,42 @@ class IncomeExpenseViewSet(viewsets.ViewSet):
 
 		return Response(json_data)
 
-#pie chart data in expense page.
-class MonthViewSet(viewsets.ViewSet):
+class TableDataViewSet(viewsets.ModelViewSet):
 	permission_classes = (IsAuthenticated,)
-
-	def list(self, request):
-
-		month = request.GET.get("month")
-		print(month)
-		data = {}
-		user = request.user
-		expense = Expense.objects.filter(timestamp__month = 4, user = user)
-		for i in expense:
-			if i.categories.title in data:
-				data[i.categories.title] += i.cost
-			else:
-				data[i.categories.title] = i.cost
-		
-		labels = []
-		dataset = []
-		
-		for key,value in data.items():
-			labels.append(key)
-			dataset.append(value)
-
-		json_data = {}
-		json_data["labels"] = labels
-		json_data["data"] = dataset
-		print("im here")
-		return Response(json_data)
-
-class TableDataViewSet(viewsets.ViewSet):
-	permission_classes = (IsAuthenticated,)
-	expense = Expense.objects.all()
+	queryset = Expense.objects.all()
 	serializer_class = ExpenseSerializer
+
+# #pie chart data in expense page.
+# class MonthViewSet(viewsets.ViewSet):
+# 	permission_classes = (IsAuthenticated,)
+
+# 	def list(self, request):
+
+# 		month = request.GET.get("month")
+# 		print(month)
+# 		data = {}
+# 		user = request.user
+# 		expense = Expense.objects.filter(timestamp__month = 4, user = user)
+# 		for i in expense:
+# 			if i.categories.title in data:
+# 				data[i.categories.title] += i.cost
+# 			else:
+# 				data[i.categories.title] = i.cost
+		
+# 		labels = []
+# 		dataset = []
+		
+# 		for key,value in data.items():
+# 			labels.append(key)
+# 			dataset.append(value)
+
+# 		json_data = {}
+# 		json_data["labels"] = labels
+# 		json_data["data"] = dataset
+# 		print("im here")
+# 		return Response(json_data)
+
+
 
 # #table data in the dash board.
 # class TableDataViewSet(viewsets.ViewSet):
