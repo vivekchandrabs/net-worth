@@ -170,3 +170,49 @@ $(document).ready(function(){
     }
   });
 });
+
+$(document).ready(function(){
+  var ctx = $('#ExpPie');
+
+  $.ajax({
+    method: "GET",
+    url: "/api/allmonthincome/",
+    type: "application/json",
+    beforeSend: function(xhr){
+      xhr.setRequestHeader("Authorization", "Token " + window.localStorage["token"]);
+    },
+    success: function(response) {
+      console.log(response);
+      var myPieChart = new Chart(ctx, {
+          type: 'doughnut',
+           data: {
+             labels: response.labels,
+             datasets:[{
+              label: 'Yearly Expense',
+              backgroundColor: ["#2980b9","#e74c3c","#8e44ad"],
+              borderColor: 'rgb(0, 0, 0)',
+              data: response.data,
+              
+             }]
+           },
+            options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+          
+});
+    },
+    error: function(xhr){
+      if (xhr.statusText == "Unauthorized") {
+        alert("You're not authorised to access this page. Please Login.");
+        window.location.href = "/";
+        
+      }
+    }
+  });
+});
