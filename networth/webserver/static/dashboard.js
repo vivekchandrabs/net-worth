@@ -103,7 +103,25 @@ $(document).ready(function(){
   });
 });
 
-$("#expense_table").on("click", function(){
-  url: "/api/tabledata/"
+$(document).ready(function(){
+  $.ajax({
+    method: "GET",
+    url: "/api/tabledata/",
+   
+    beforeSend: function(xhr){
+      xhr.setRequestHeader("Authorization", "Token " + window.localStorage["token"]);
+    },
+    success: function(response){
+      console.log(response);
+      for(let i of response)
+        $("#expense_table").append(`
+          <tr scope="row">            
+            <td>${i.categories.title}</td>
+            <td>${i.title}</td>
+            <td>${i.description}</td>
+            <td>${i.cost}</td>
+          </tr>
+        `)
+    }
+  })
 })
-
