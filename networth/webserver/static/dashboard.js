@@ -63,7 +63,7 @@ $(document).ready(function(){
 
   $.ajax({
     method: "GET",
-    url: "/api/inexp/",
+    url: "/api/barchartexp/",
     type: "application/json",
     beforeSend: function(xhr){
       xhr.setRequestHeader("Authorization", "Token " + window.localStorage["token"]);
@@ -77,7 +77,7 @@ $(document).ready(function(){
               label: 'Yearly Expense',
               backgroundColor: 'rgb(255, 99, 132)',
               borderColor: 'rgb(255, 99, 132)',
-              data: response.expense,
+              data: response.data,
               
              }]
            },
@@ -125,3 +125,4 @@ $(document).ready(function(){
     }
   })
 })
+
