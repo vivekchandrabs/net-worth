@@ -14,8 +14,9 @@ $("#signup").on("click", function(){
 		type: 'application/json',
 		data: data,
 		success: function(response){
-			window.localStorage.setItem('token', response.token);
-			window.location = '/dashboard/';
+			console.log(response);
+			window.localStorage.setItem("token", response.token);
+			window.location.href = '/dashboard/';
 		}
 	}); 
 }); 

@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from django.shortcuts import render,redirect,HttpResponse
 from django.contrib.auth.models import User
 from api.models import Category,Expense,Income
-from api.serializers import CategorySerializer, ExpenseSerializer, IncomeSerializer, AllMonthSerializer
+from api.serializers import *
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.contrib.auth.decorators import login_required
 from rest_framework.authtoken.models import Token
@@ -185,7 +185,7 @@ class SignupViewSet(viewsets.ModelViewSet):
 	This is for the creating a new user.
 	permission_classes: AllowAny
 	'''
-
+	serializer_class = UserSerializer
 	permission_classes = (AllowAny,)
 
 	def create(self,request):
@@ -198,9 +198,8 @@ class SignupViewSet(viewsets.ModelViewSet):
 		email = request.data['email']
 
 		user = User.objects.create_user(username = username, email=email, password = password)
-		# token = Token.objects.create(user=user)
-		# print(token)
-		return redirect('/dashboard/')
+		token = Token.objects.create(user=user)
+		return Response({"token":token.key})
 
 #for pie chart data in dash board// expense
 class AllMonthExpenseViewSet(viewsets.ViewSet):

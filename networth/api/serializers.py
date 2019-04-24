@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from api.models import Category,Expense,Income
+from django.contrib.auth.models import User
 
 class CategorySerializer(serializers.ModelSerializer):
 
@@ -27,3 +28,9 @@ class IncomeSerializer(serializers.ModelSerializer):
 class AllMonthSerializer(serializers.Serializer):
 	labels = serializers.ListField()
 	data = serializers.ListField()
+
+class UserSerializer(serializers.Serializer):
+
+	class Meta:
+		model = User
+		fields = "__all__"
