@@ -1,4 +1,4 @@
-
+let colors = ["#e74c3c","#3498db","#2ecc71","#3498db","#f1c40f","#4834d4","#130f40","#95afc0","#f0932b"]
 function checkAuth() {
     if (!window.localStorage['token']) {
         alert("You're not authorised to access this page. Please Login.");
@@ -23,7 +23,7 @@ function drawAllExpenseChart() {
                     labels: response.labels,
                     datasets: [{
                         label: 'Yearly Expense',
-                        backgroundColor: ["#2980b9", "#e74c3c", "#8e44ad"],
+                        backgroundColor: colors,
                         borderColor: 'rgb(0, 0, 0)',
                         data: response.data,
 
@@ -61,8 +61,8 @@ function drawExpenseBarChart() {
                     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                     datasets: [{
                         label: 'Yearly Expense',
-                        backgroundColor: 'rgb(255, 99, 132)',
-                        borderColor: 'rgb(255, 99, 132)',
+                        backgroundColor: colors,
+                        borderColor: 'rgb(0,0,0)',
                         data: response.data,
 
                     }]
@@ -122,8 +122,8 @@ function drawIncomeChart(){
                     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                     datasets: [{
                         label: 'Yearly Income',
-                        backgroundColor: 'rgb(255, 99, 132)',
-                        borderColor: 'rgb(255, 99, 132)',
+                        backgroundColor: colors,
+                        borderColor: 'rgb(0,0,0)',
                         data: response.data,
 
                     }]
@@ -164,7 +164,7 @@ function drawAllIncomeChart() {
                     labels: response.labels,
                     datasets: [{
                         label: 'Yearly Income',
-                        backgroundColor: ["#2980b9", "#e74c3c", "#8e44ad"],
+                        backgroundColor: colors,
                         borderColor: 'rgb(0, 0, 0)',
                         data: response.data,
 
