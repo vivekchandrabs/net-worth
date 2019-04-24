@@ -10,7 +10,7 @@ $("#signin").on("click", function(){
 	$.ajax({
 
 		method: "POST",
-		url: "http://127.0.0.1:8000/api-token-auth/",
+		url: "/api-token-auth/",
 		type: "application/json",
 		data: data,
 		success: function(response){

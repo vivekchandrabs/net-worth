@@ -10,7 +10,7 @@ $("#signup").on("click", function(){
 	console.log(email);
 	$.ajax({
 		method: 'POST',
-		url: 'http://127.0.0.1:8000/api/signup/',
+		url: '/api/signup/',
 		type: 'application/json',
 		data: data,
 		success: function(response){

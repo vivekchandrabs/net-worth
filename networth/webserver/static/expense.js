@@ -67,7 +67,7 @@ $("#save_category").on("click", function(){
 $("#delete_cat").on("click", function(){
 $.ajax({
 	method: "GET",
-	url:"http://127.0.0.1:8000/api/category/",
+	url:"/api/category/",
 	beforeSend: function(xhr){
 			xhr.setRequestHeader("Authorization", "Token " + window.localStorage["token"]);
 	},
@@ -96,7 +96,7 @@ $("#add_expense").on("click", function(){
 
 $.ajax({
 	method: "GET",
-	url:"http://127.0.0.1:8000/api/category/",
+	url:"/api/category/",
 	beforeSend: function(xhr){
 			xhr.setRequestHeader("Authorization", "Token " + window.localStorage["token"]);
 	},
@@ -121,7 +121,7 @@ $("#add_income").on("click", function(){
 
 $.ajax({
 	method: "GET",
-	url:"http://127.0.0.1:8000/api/category/",
+	url:"/api/category/",
 	beforeSend: function(xhr){
 			xhr.setRequestHeader("Authorization", "Token " + window.localStorage["token"]);
 	},
@@ -455,57 +455,6 @@ function edit_inc_function(id,income_id){
 	})
 	
 }
-
-// $(document).ready(function(){
-
-// 	var month_id = 12;
-
-// 	for(let i=4; i<5;i++){
-// 	var id = "#month"+i;
-// 	console.log(id);
-// 	var ctx = $(id);
-// 	let json_data = {};
-// 	json_data["month"] = i;
-// 	$.ajax({
-// 		method: "GET",
-// 		url: "/api/monthexp/",
-// 		contentType: "application/json",
-// 		async:false,
-// 		data: json_data,
-// 		beforeSend: function(xhr){
-// 			xhr.setRequestHeader("Authorization", "Token " + window.localStorage["token"]);
-
-// 		},
-// 		success: function(response){
-// 			console.log(response);
-// 			var myPieChart = new Chart(ctx, {
-//     			type: 'doughnut',
-//     			data: {
-//    				 	labels: response.labels,
-//    				 	datasets:[{
-//    				 		label: 'monthly Expense',
-//    				 		backgroundColor: 'rgb(255, 99, 132)',
-//    				 		borderColor: 'rgb(255, 99, 132)',
-//    				 		data: response.data,
-   				 	 	
-//    				 	}]
-//    				 },
-//    				  options: {
-//         scales: {
-//             yAxes: [{
-//                 ticks: {
-//                     beginAtZero: true
-//                 }
-//             }]
-//         }
-//     }
-// 			});
-// 		}
-// 	})
-
-// 	}
-
-// })
 
 
 
