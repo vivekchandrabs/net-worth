@@ -271,6 +271,8 @@ class MonthViewSet(viewsets.ViewSet):
 
 	def list(self, request):
 
+		month = request.GET.get("month")
+		print(month)
 		data = {}
 		user = request.user
 		expense = Expense.objects.filter(timestamp__month = 4, user = user)
@@ -293,46 +295,51 @@ class MonthViewSet(viewsets.ViewSet):
 		print("im here")
 		return Response(json_data)
 
-#table data in the dash board.
 class TableDataViewSet(viewsets.ViewSet):
-	permissions_classes = (IsAuthenticated,)
+	permission_classes = (IsAuthenticated,)
+	expense = Expense.objects.all()
+	serializer_class = ExpenseSerializer
 
-	def list(self, request):
-		user = request.user
+# #table data in the dash board.
+# class TableDataViewSet(viewsets.ViewSet):
+# 	permissions_classes = (IsAuthenticated,)
 
-		expense = Expense.objects.filter(user = user)
+# 	def list(self, request):
+# 		user = request.user
+
+# 		expense = Expense.objects.filter(user = user)
 
 
-		label = []
-		for l in expense:
-			if l.categories.title not in label:
-				label.append(l.categories.title)
+# 		label = []
+# 		for l in expense:
+# 			if l.categories.title not in label:
+# 				label.append(l.categories.title)
 
-		data = {}
-		for i in expense:
+# 		data = {}
+# 		for i in expense:
 
-			if i.categories.title in data:
-				cat = data[i.categories.title]
+# 			if i.categories.title in data:
+# 				cat = data[i.categories.title]
 
-				if i.timestamp.month in cat:
-					cat[i.timestamp.month] += i.cost
+# 				if i.timestamp.month in cat:
+# 					cat[i.timestamp.month] += i.cost
 
-				else:
+# 				else:
 
-					cat[i.timestamp.month] = i.cost
+# 					cat[i.timestamp.month] = i.cost
 
-				data[i.categories.title] = cat
+# 				data[i.categories.title] = cat
 
-			else:
+# 			else:
 
-				data[i.categories.title] = {i.timestamp.month:i.cost}
-				# data[i.categories.title][i.timestamp.month] = data[i.categories.title][i.timestamp.month].append(i.cost)
+# 				data[i.categories.title] = {i.timestamp.month:i.cost}
+# 				# data[i.categories.title][i.timestamp.month] = data[i.categories.title][i.timestamp.month].append(i.cost)
 
-		print(data)
-		json_data = {}
-		json_data["labels"] = label
-		json_data["data"] = data
-		return Response(json_data)
+# 		print(data)
+# 		json_data = {}
+# 		json_data["labels"] = label
+# 		json_data["data"] = data
+# 		return Response(json_data)
 
 
 

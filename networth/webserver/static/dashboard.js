@@ -63,7 +63,7 @@ $(document).ready(function(){
 
   $.ajax({
     method: "GET",
-    url: "/api/allmonthexpense/",
+    url: "/api/inexp/",
     type: "application/json",
     beforeSend: function(xhr){
       xhr.setRequestHeader("Authorization", "Token " + window.localStorage["token"]);
@@ -72,12 +72,12 @@ $(document).ready(function(){
       var myBarChart = new Chart(ctx, {
           type: 'bar',
            data: {
-             labels: response.labels,
+             labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
              datasets:[{
               label: 'Yearly Expense',
               backgroundColor: 'rgb(255, 99, 132)',
               borderColor: 'rgb(255, 99, 132)',
-              data: response.data,
+              data: response.expense,
               
              }]
            },
@@ -102,4 +102,8 @@ $(document).ready(function(){
     }
   });
 });
+
+$("#expense_table").on("click", function(){
+  url: "/api/tabledata/"
+})
 

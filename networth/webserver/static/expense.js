@@ -9,15 +9,15 @@ var income_date = date.getMonth() + 1
 
 $("#add").on('click', function(){
 	
-	
+
 	$("#category").append(`
 		<label for="recipient-name" class="col-form-label">Enter your new category :</label>
-		<input id = ${count} class = "form-control" type='text'>
+		<input id = ${count} class = "form-control" type='text' required>
 		`)
 
 	$("#description").append(`
 		<label for="recipient-name" class="col-form-label">Enter your new description :</label>
-		<input id = ${count+"d"} class = "form-control" type='text'>
+		<input id = ${count+"d"} class = "form-control" type='text' required>
 		`)
 	count = count + 1;
 	console.log(count);
@@ -68,7 +68,9 @@ $.ajax({
 			xhr.setRequestHeader("Authorization", "Token " + window.localStorage["token"]);
 	},
 	success: function(response){
-		$("#delcategory").empty()
+		console.log(response);
+		$("#delcategory").empty();
+		console.log("here")
 		checkout = 1;
 		console.log("here")
 		for(let i of response)
@@ -442,23 +444,33 @@ function edit_inc_function(id,income_id){
 }
 
 // $(document).ready(function(){
-// 	var ctx = $('#pieChart');
 
+// 	var month_id = 12;
+
+// 	for(let i=4; i<5;i++){
+// 	var id = "#month"+i;
+// 	console.log(id);
+// 	var ctx = $(id);
+// 	let json_data = {};
+// 	json_data["month"] = i;
 // 	$.ajax({
 // 		method: "GET",
 // 		url: "/api/monthexp/",
-// 		type: "application/json",
+// 		contentType: "application/json",
+// 		async:false,
+// 		data: json_data,
 // 		beforeSend: function(xhr){
 // 			xhr.setRequestHeader("Authorization", "Token " + window.localStorage["token"]);
 
 // 		},
 // 		success: function(response){
+// 			console.log(response);
 // 			var myPieChart = new Chart(ctx, {
 //     			type: 'doughnut',
 //     			data: {
 //    				 	labels: response.labels,
 //    				 	datasets:[{
-//    				 		label: 'Yearly Expense',
+//    				 		label: 'monthly Expense',
 //    				 		backgroundColor: 'rgb(255, 99, 132)',
 //    				 		borderColor: 'rgb(255, 99, 132)',
 //    				 		data: response.data,
@@ -477,6 +489,9 @@ function edit_inc_function(id,income_id){
 // 			});
 // 		}
 // 	})
+
+// 	}
+
 // })
 
 
