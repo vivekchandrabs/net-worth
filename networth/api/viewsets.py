@@ -202,7 +202,7 @@ class SignupViewSet(viewsets.ModelViewSet):
 		return redirect('/dashboard/')
 
 #for pie chart data in dash board// expense
-class AllMonthViewSet(viewsets.ViewSet):
+class AllMonthExpenseViewSet(viewsets.ViewSet):
 	'''
 	This is for returning the list of expense.
 	permission_classes: IsAuthenticated.
@@ -238,7 +238,7 @@ class AllMonthViewSet(viewsets.ViewSet):
 		return Response(json_data)
 
 # pie chart for the dash board // income.
-class AllMonthExpenseViewSet(viewsets.ViewSet):
+class AllMonthIncomeViewSet(viewsets.ViewSet):
 
 	permission_classes = [IsAuthenticated,]
 
