@@ -237,7 +237,7 @@ class AllMonthViewSet(viewsets.ViewSet):
 		print("im here")
 		return Response(json_data)
 
-
+# pie chart for the dash board // income.
 class AllMonthExpenseViewSet(viewsets.ViewSet):
 
 	permission_classes = [IsAuthenticated,]
