@@ -23,7 +23,7 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarColor01">
 					<ul class="navbar-nav mr-auto">
-				
+						
 						
 					</ul>
 					<form class="form-inline my-2 my-lg-0">
@@ -35,8 +35,7 @@
 		</nav>
 		<br><br>
 		<div class="container">
-
-		
+			
 			<button type="button" class="btn btn-primary" style="margin-right: 63px;" data-toggle="modal" data-target="#addcat">
 			Add Category
 			</button>
@@ -63,199 +62,216 @@
 				<div class="col-md-6">
 					<canvas id="BarChart" width="400" height="400px" style="max-height: 400px; max-width: 400px"></canvas>
 				</div>
+			</div><br><br>
+			<div class="row">
+				<div class="col-md-6">
+					<canvas id="ExpPie" width="400" height="400px" style="max-height: 400px; max-width: 400px"></canvas>
+				</div>
+				<div class="col-md-6">
+					<canvas id="ExpBar" width="400" height="400px" style="max-height: 400px; max-width: 400px"></canvas>
+				</div>
+			</div><br><br>
+			<div class="row">
+				<table class="table table-striped" >
+					<thead>
+						<tr>
+							<th scope="col">CATEGORY</th>
+							<th scope="col">TITLE</th>
+							<th scope="col">DESCRIPTION</th>
+							<th scope="col">COST</th>
+						</tr>
+					</thead>
+					<tbody id="expense_table">
+						
+					</tbody>
+				</table>
 			</div>
 		</div>
 		
 		<div class="modal fade" id="addcat" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"        aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalCenterTitle">Add Category</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<form>
-								<div class="form-group" >
-									<div class="row">
-										<div class="col-md-6" id="category">
-											
-										</div>
-										<div class="col-md-6" id="description">
-											
-										</div>
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalCenterTitle">Add Category</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="form-group" >
+								<div class="row">
+									<div class="col-md-6" id="category">
+										
+									</div>
+									<div class="col-md-6" id="description">
 										
 									</div>
 									
 								</div>
-							</form>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" id="add">Click to Add Category</button>
-							<button type="button" data-dismiss="modal" id="save_category" class="btn btn-primary">Save changes</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="modal fade" id="delcat" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"        aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalCenterTitle">Delete Category</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<form>
-								<div class="form-group" id="delcategory">
-									<label for="recipient-name" class="col-form-label">Select your category :</label>
-									<div id="check">
-									</div>
-								</div>
-							</form>
-						</div>
-						<div class="modal-footer">
-							<button type="button" data-dismiss="modal" id="del_category" class="btn btn-primary">Delete</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="modal fade" id="addexp" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"        aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalCenterTitle">Add Expense</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<form>
-								<div class="form-group">
-									<div class="dropdown">
-										<label class="col-form-label">Select Category:</label>
-										<select class="form-group" style="width:100%" id="select_category">
-										</select>
-									</div>
-									<form>
-										<div class="form-group" id="category">
-											<label for="recipient-name" class="col-form-label">Add Amount :</label>
-											<input type="number" id="expense_cost" class="form-control" required>
-										</div>
-									</form>
-									<form>
-										<div class="form-group">
-											<label for="recipient-name" class="col-form-label">Title :</label>
-											<input type="text" id="expense_title" class="form-control" required>
-										</div>
-									</form>
-									<form>
-										<div class="form-group">
-											<label for="recipient-name" class="col-form-label">Description :</label>
-											<input type="text" id="expense_des" class="form-control" required>
-										</div>
-									</form>
-								</div>
-							</form>
-						</div>
-						<div class="modal-footer">
-							<button type="submit" data-dismiss="modal" class="btn btn-primary" id="done">Add</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="modal fade bd-example-modal-xl" id="editexp" >
-				<div class="modal-dialog modal-xl">
-					<div class="modal-content">
-						<div class="container">
-							<div style="display: inline-block;">
-								<button style="float:left" onclick="edit_expense(-1)"><span>&#8592;</span></button>
-								<h5 style="text-align:center;padding-top:20px;">Edit Expense</h5>
-								<button style="float:right" onclick="edit_expense(+1)"><span>&#8594;</span></button>
-							</div>
-							<hr style="background-color: white">
-							<div id="edit_exp_div">
 								
 							</div>
-						</div>
-						<div class="modal-footer">
-							
-							<button type="button" data-dismiss="modal" class="btn btn-primary">Close</button>
-						</div>
+						</form>
 					</div>
-					
-				</div>
-			</div>
-			
-			
-			<div class="modal fade" id="addinc" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"        aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="">Edit Income</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<div class="dropdown">
-								<label class="col-form-label">Select Category:</label>
-								<select class="form-group" style="width:100%" id="select_category_income">
-								</select>
-							</div>
-							
-							<div class="form-group">
-								<label for="recipient-name" class="col-form-label">Title:</label>
-								<input type="text" id="income_title" class="form-control">
-							</div>
-							<div class="form-group">
-								<label for="recipient-name" class="col-form-label">Description:</label>
-								<input type="text" id="income_des" class="form-control">
-							</div>
-							<div class="form-group">
-								<label for="recipient-name" class="col-form-label">Money:</label>
-								<input type="number" id="income_money" class="form-control">
-							</div>
-							
-						</div>
-						<div class="modal-footer">
-							
-							<button type="button" data-dismiss="modal" id="save_income" class="btn btn-primary">Save changes</button>
-						</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" id="add">Click to Add Category</button>
+						<button type="button" data-dismiss="modal" id="save_category" class="btn btn-primary">Save changes</button>
 					</div>
 				</div>
 			</div>
-			<div class="modal fade bd-example-modal-xl" id="editinc" >
-				<div class="modal-dialog modal-xl">
-					<div class="modal-content">
-						<div class="container">
-							<div style="display: inline-block;">
-								<button style="float:left" onclick="edit_income(-1)"><span>&#8592;</span></button>
-								<h5 style="text-align:center;padding-top:20px;">Edit Income</h5>
-								<button style="float:right" onclick="edit_income(+1)"><span>&#8594;</span></button>
-							</div>
-							<hr style="background-color: white">
-							<div id="edit_inc_div">
-								
-							</div>
-						</div>
-						<div class="modal-footer">
-							
-							<button type="button" data-dismiss="modal" class="btn btn-primary">Close</button>
-						</div>
+		</div>
+		<div class="modal fade" id="delcat" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"        aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalCenterTitle">Delete Category</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
 					</div>
-					
+					<div class="modal-body">
+						<form>
+							<div class="form-group" id="delcategory">
+								<label for="recipient-name" class="col-form-label">Select your category :</label>
+								<div id="check">
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" data-dismiss="modal" id="del_category" class="btn btn-primary">Delete</button>
+					</div>
 				</div>
 			</div>
-
-			<div class="container">
-				<div class="expense_table">
-					
+		</div>
+		<div class="modal fade" id="addexp" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"        aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalCenterTitle">Add Expense</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="form-group">
+								<div class="dropdown">
+									<label class="col-form-label">Select Category:</label>
+									<select class="form-group" style="width:100%" id="select_category">
+									</select>
+								</div>
+								<form>
+									<div class="form-group" id="category">
+										<label for="recipient-name" class="col-form-label">Add Amount :</label>
+										<input type="number" id="expense_cost" class="form-control" required>
+									</div>
+								</form>
+								<form>
+									<div class="form-group">
+										<label for="recipient-name" class="col-form-label">Title :</label>
+										<input type="text" id="expense_title" class="form-control" required>
+									</div>
+								</form>
+								<form>
+									<div class="form-group">
+										<label for="recipient-name" class="col-form-label">Description :</label>
+										<input type="text" id="expense_des" class="form-control" required>
+									</div>
+								</form>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" data-dismiss="modal" class="btn btn-primary" id="done">Add</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade bd-example-modal-xl" id="editexp" >
+			<div class="modal-dialog modal-xl">
+				<div class="modal-content">
+					<div class="container">
+						<div style="display: inline-block;">
+							<button style="float:left" onclick="edit_expense(-1)"><span>&#8592;</span></button>
+							<h5 style="text-align:center;padding-top:20px;">Edit Expense</h5>
+							<button style="float:right" onclick="edit_expense(+1)"><span>&#8594;</span></button>
+						</div>
+						<hr style="background-color: white">
+						<div id="edit_exp_div">
+							
+						</div>
+					</div>
+					<div class="modal-footer">
+						
+						<button type="button" data-dismiss="modal" class="btn btn-primary">Close</button>
+					</div>
 				</div>
 				
 			</div>
+		</div>
+		
+		
+		<div class="modal fade" id="addinc" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"        aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="">Add Income</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="dropdown">
+							<label class="col-form-label">Select Category:</label>
+							<select class="form-group" style="width:100%" id="select_category_income">
+							</select>
+						</div>
+						
+						<div class="form-group">
+							<label for="recipient-name" class="col-form-label">Title:</label>
+							<input type="text" id="income_title" class="form-control">
+						</div>
+						<div class="form-group">
+							<label for="recipient-name" class="col-form-label">Description:</label>
+							<input type="text" id="income_des" class="form-control">
+						</div>
+						<div class="form-group">
+							<label for="recipient-name" class="col-form-label">Money:</label>
+							<input type="number" id="income_money" class="form-control">
+						</div>
+						
+					</div>
+					<div class="modal-footer">
+						
+						<button type="button" data-dismiss="modal" id="save_income" class="btn btn-primary">Save changes</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade bd-example-modal-xl" id="editinc" >
+			<div class="modal-dialog modal-xl">
+				<div class="modal-content">
+					<div class="container">
+						<div style="display: inline-block;">
+							<button style="float:left" onclick="edit_income(-1)"><span>&#8592;</span></button>
+							<h5 style="text-align:center;padding-top:20px;">Edit Income</h5>
+							<button style="float:right" onclick="edit_income(+1)"><span>&#8594;</span></button>
+						</div>
+						<hr style="background-color: white">
+						<div id="edit_inc_div">
+							
+						</div>
+					</div>
+					<div class="modal-footer">
+						
+						<button type="button" data-dismiss="modal" class="btn btn-primary">Close</button>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		
 		
 		<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 		<script
@@ -264,7 +280,6 @@
 		crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
 		<script type="text/javascript" src="/static/dashboard.js"></script>
 		<script type="text/javascript" src="/static/expense.js"></script>
 		<script type="text/javascript" src="/static/logout.js"></script>
