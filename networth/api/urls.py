@@ -4,7 +4,8 @@ from api.viewsets import *
 
 
 router = DefaultRouter()
-router.register(r'month', MonthExpenseViewSet, base_name="MonthExpense")
+router.register(r'monthexp', MonthExpenseViewSet, base_name="MonthExpense")
+router.register(r'monthinc', MonthIncomeViewSet, base_name="MonthIncome")
 router.register(r'category',CategoryViewSet)
 router.register(r'expense',ExpenseViewSet, base_name="expense_list")
 router.register(r'income',IncomeViewSet)

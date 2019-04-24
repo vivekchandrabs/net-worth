@@ -311,7 +311,8 @@ function edit_exp_function(id,expense_id){
 	var cost = $(cost_id).val();
 	let json_data = new Object();
 	
-
+	console.log(current_date);
+	json_data['month'] = current_date;
 	json_data['title'] = title;
 	json_data['description'] = des;
 	json_data['cost'] = cost;
@@ -420,6 +421,7 @@ function edit_inc_function(id,income_id){
 	var cost = ($(cost_id).val());
 	let json_data = {}
 	
+	json_data["month"] = income_date;
 	json_data["title"] = title;
 	json_data["description"] = des;
 	json_data["money"] = cost;

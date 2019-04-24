@@ -94,15 +94,15 @@ class ExpenseViewSet(viewsets.ModelViewSet):
 		'''
 		print("here")
 		user = self.request.user
-		# print(self.request.data)
-		month = self.request.GET.get("month")
+		print(self.request.method)
+
+		if self.request.method == "GET":
+			month = self.request.GET.get("month")
+		else:
+			month = self.request.data["month"]
+
 		expense = Expense.objects.filter(user = user,timestamp__month=month)
 		return expense
-
-	# def partial_update(self, request, pk=None):
-	# 	print(request.data)
-	# 	print(pk)
-
 
 
 #for the add income button.
@@ -146,7 +146,12 @@ class IncomeViewSet(viewsets.ModelViewSet):
 		this returns a list of incomes of the user according to the month
 		'''
 		user = self.request.user
-		month = self.request.GET.get('month')
+
+		if self.request.method == "GET":
+			month = self.request.GET.get('month')
+		else:
+			month = self.request.data["month"]
+			
 		income = Income.objects.filter(user = user,timestamp__month=month)
 		return income
 
@@ -156,9 +161,22 @@ class MonthExpenseViewSet(viewsets.ModelViewSet):
 	permission_classes = (IsAuthenticated,)
 
 	def get_queryset(self):
-		month = self.request.data['month']
+		user = self.request.user
+		print("hereasdsadasd")
+		# print(self.request.data)
+		month = self.request.GET.get('month')
+		print(month)
+		query = Expense.objects.filter(timestamp__month=month, user = user)
+		return query
+
+class MonthIncomeViewSet(viewsets.ModelViewSet):
+	serializer_class = IncomeSerializer
+	permission_classes = (IsAuthenticated,)
+
+	def get_queryset(self):
 		print(self.request.data)
-		query = Expense.objects.filter(timestamp__month=month)
+		month = self.request.GET.get('month')
+		query = Income.objects.filter(timestamp__month=month)
 		return query
 
 class SignupViewSet(viewsets.ModelViewSet):
