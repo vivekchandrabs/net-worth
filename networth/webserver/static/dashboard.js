@@ -126,3 +126,47 @@ $(document).ready(function(){
   })
 })
 
+$(document).ready(function(){
+  var ctx = $('#ExpBar');
+
+  $.ajax({
+    method: "GET",
+    url: "/api/barchartinc/",
+    type: "application/json",
+    beforeSend: function(xhr){
+      xhr.setRequestHeader("Authorization", "Token " + window.localStorage["token"]);
+    },
+    success: function(response) {
+      var myBarChart = new Chart(ctx, {
+          type: 'bar',
+           data: {
+             labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+             datasets:[{
+              label: 'Yearly Expense',
+              backgroundColor: 'rgb(255, 99, 132)',
+              borderColor: 'rgb(255, 99, 132)',
+              data: response.data,
+              
+             }]
+           },
+            options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+          
+});
+    },
+    error: function(xhr){
+      if (xhr.statusText == "Unauthorized") {
+        alert("You're not authorised to access this page. Please Login.");
+        window.location.href = "/";
+        
+      }
+    }
+  });
+});
