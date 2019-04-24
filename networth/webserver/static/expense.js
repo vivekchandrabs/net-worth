@@ -31,22 +31,26 @@ $("#save_category").on("click", function(){
 
 		var cat = $("#"+i).val();
 		var description = $("#"+i+"d").val();
-		let data = {}
-		data["title"] = cat;
-		data["description"] = description;
-		console.log(data)
+
+		if (cat == null || description == null){
+			alert("Cannot submit the empty form")
+		}
+
+		let json_data = {};
+		json_data["title"] = cat;
+		json_data["description"] = description;
+		console.log(json_data)
+		
 		$.ajax({
 
 			method:"POST",
+			data: json_data,
+			type: "application/json",
 			url:"/api/category/",
-			contentType: "application/json",
-			data: data,
 			beforeSend: function(xhr){
-
-			xhr.setRequestHeader("Authorization", "Token " + window.localStorage["token"]);
+				xhr.setRequestHeader("Authorization", "Token " + window.localStorage["token"]);
 			},
-			success: function(response)
-			{
+			success: function(response)	{
 				console.log("done");
 			}
 

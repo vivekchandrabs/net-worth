@@ -28,6 +28,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
 		user = request.user
 		print(user)
 		print(request.data)	
+		print("here")
 		title = request.data["title"]
 		description = request.data["description"]
 		category = Category(title = title,
