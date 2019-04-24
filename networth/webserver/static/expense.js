@@ -34,12 +34,12 @@ $("#save_category").on("click", function(){
 		let data = {}
 		data["title"] = cat;
 		data["description"] = description;
-		
+		console.log(data)
 		$.ajax({
 
 			method:"POST",
 			url:"/api/category/",
-			type: "application/json",
+			contentType: "application/json",
 			data: data,
 			beforeSend: function(xhr){
 

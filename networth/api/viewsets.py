@@ -25,19 +25,17 @@ class CategoryViewSet(viewsets.ModelViewSet):
 		:method:POST:
 		creates a new category.
 		'''
-
 		user = request.user
 		print(user)
-		title = request.data['title']
-		description = request.data['description']
+		print(request.data)	
+		title = request.data["title"]
+		description = request.data["description"]
 		category = Category(title = title,
 							description = description,
 							user = user)
 		category.save()
 
 		category = CategorySerializer(category)
-		print(category)
-		print(category.data)
 		return Response(category.data)
 
 	def get_queryset(self):
