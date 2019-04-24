@@ -1,1 +1,1 @@
-web: networth myproject.wsgi
+web: gunicorn networth.wsgi
