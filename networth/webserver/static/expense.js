@@ -171,6 +171,7 @@ $("#done").on('click', function(){
 	let cost_money = $("#expense_cost").val()
 	let cost_title = $("#expense_title").val()
 	let cost_des = $("#expense_des").val()
+	let expense_date = $("#expense_date").val()
 
 	let json_data = {}
 
@@ -178,6 +179,7 @@ $("#done").on('click', function(){
 	json_data["categories"] = cat_id
 	json_data["cost"] = cost_money
 	json_data["description"] = cost_des
+	json_data["time"] = expense_date
 
 	
 	$.ajax({
@@ -204,12 +206,17 @@ $("#save_income").on("click", function(){
 	let cost_money = $("#income_money").val()
 	let cost_title = $("#income_title").val()
 	let cost_des = $("#income_des").val()
+	let income_date = $("#income_date").val()
+
+
 
 	let json_data = {};
 	json_data["title"] = cost_title
 	json_data["description"] = cost_des
 	json_data["money"] = cost_money
 	json_data["categories"] = cat_id
+	json_data["time"] = income_date
+
 	$.ajax({
 
 		method:"POST",

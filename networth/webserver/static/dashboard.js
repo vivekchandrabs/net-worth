@@ -142,7 +142,7 @@ $(document).ready(function(){
            data: {
              labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
              datasets:[{
-              label: 'Yearly Expense',
+              label: 'Yearly Income',
               backgroundColor: 'rgb(255, 99, 132)',
               borderColor: 'rgb(255, 99, 132)',
               data: response.data,
@@ -188,7 +188,7 @@ $(document).ready(function(){
            data: {
              labels: response.labels,
              datasets:[{
-              label: 'Yearly Expense',
+              label: 'Yearly Income',
               backgroundColor: ["#2980b9","#e74c3c","#8e44ad"],
               borderColor: 'rgb(0, 0, 0)',
               data: response.data,
