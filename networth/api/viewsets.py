@@ -212,6 +212,7 @@ class AllMonthExpenseViewSet(viewsets.ViewSet):
 		json_data["labels"] = labels
 		json_data["data"] = dataset
 		print("im here")
+		print(json_data)
 		return Response(json_data)
 
 # pie chart for the dash board // income.
