@@ -32,14 +32,16 @@ $("#save_category").on("click", function(){
 		var cat = $("#"+i).val();
 		var description = $("#"+i+"d").val();
 
-		if (cat == null || description == null){
-			alert("Cannot submit the empty form")
+		console.log(cat);
+		if (cat == '' || description == ''){   
+			alert("Cannot submit the empty form");
+			window.location.href = '/dashboard/';
 		}
 
 		let json_data = {};
 		json_data["title"] = cat;
 		json_data["description"] = description;
-		console.log(json_data)
+		// console.log(json_data)
 		
 		$.ajax({
 
@@ -176,7 +178,7 @@ $("#done").on('click', function(){
 	let cost_title = $("#expense_title").val()
 	let cost_des = $("#expense_des").val()
 	let expense_date = $("#expense_date").val()
-
+	console.log(expense_date);
 	let json_data = {}
 
 	json_data["title"] = cost_title
@@ -197,6 +199,12 @@ $("#done").on('click', function(){
 				success: function(response){
 
 					console.log("done")
+					 drawExpenseTable();
+					  drawAllExpenseChart();
+					  drawIncomeChart();
+					  drawAllIncomeChart();
+					  drawExpenseBarChart();
+
 				}
 
 			});
@@ -233,6 +241,11 @@ $("#save_income").on("click", function(){
 		},
 		success: function(response){
 			console.log("done")
+			drawExpenseTable();
+					  drawAllExpenseChart();
+					  drawIncomeChart();
+					  drawAllIncomeChart();
+					  drawExpenseBarChart();
 		}
 
 	});	
@@ -267,7 +280,9 @@ function edit_expense(month_number){
 			xhr.setRequestHeader("Authorization", "Token "+ window.localStorage["token"])
 		},
 		success: function(response){
+
 			$("#edit_exp_div").empty();
+			
 			$("#edit_exp_div").append(`
 				<div id="edit_exp_div_item">
 
@@ -342,6 +357,11 @@ function edit_exp_function(id,expense_id){
 		},
 		success: function(response){
 			console.log("done");
+			drawExpenseTable();
+					  drawAllExpenseChart();
+					  drawIncomeChart();
+					  drawAllIncomeChart();
+					  drawExpenseBarChart();
 		}
 
 	})
@@ -450,6 +470,11 @@ function edit_inc_function(id,income_id){
 		},
 		success: function(response){
 			console.log("done");
+			drawExpenseTable();
+					  drawAllExpenseChart();
+					  drawIncomeChart();
+					  drawAllIncomeChart();
+					  drawExpenseBarChart();
 		}
 
 	})

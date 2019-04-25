@@ -3,7 +3,7 @@ from api.models import Category,Expense,Income
 from django.contrib.auth.models import User
 
 class CategorySerializer(serializers.ModelSerializer):
-
+	
 	class Meta:
 
 		model = Category

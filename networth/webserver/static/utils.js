@@ -83,6 +83,7 @@ function drawExpenseBarChart() {
 }
 
 function drawExpenseTable() {
+  $("#expense_table").empty();
   $.ajax({
         method: "GET",
         url: "/api/tabledata/",

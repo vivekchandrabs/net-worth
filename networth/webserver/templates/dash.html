@@ -201,11 +201,18 @@
 				<div class="modal-content">
 					<div class="container">
 						<div style="display: inline-block;">
-							<button style="float:left" onclick="edit_expense(-1)"><span>&#8592;</span></button>
+							
 							<h5 style="text-align:center;padding-top:20px;">Edit Expense</h5>
-							<button style="float:right" onclick="edit_expense(+1)"><span>&#8594;</span></button>
+							<button  onclick="edit_expense(-1)"><span>&#8592;</span></button>
+							<button  onclick="edit_expense(+1)"><span>&#8594;</span></button>
+							
 						</div>
-						<hr style="background-color: white">
+						<hr style="background-color: black">
+						<div id="expense_month_year">
+							
+						</div>
+						
+					
 						<div id="edit_exp_div">
 							
 						</div>
@@ -266,11 +273,12 @@
 				<div class="modal-content">
 					<div class="container">
 						<div style="display: inline-block;">
-							<button style="float:left" onclick="edit_income(-1)"><span>&#8592;</span></button>
+							
 							<h5 style="text-align:center;padding-top:20px;">Edit Income</h5>
+							<button style="float:left" onclick="edit_income(-1)"><span>&#8592;</span></button>
 							<button style="float:right" onclick="edit_income(+1)"><span>&#8594;</span></button>
 						</div>
-						<hr style="background-color: white">
+						<hr style="background-color: black">
 						<div id="edit_inc_div">
 							
 						</div>
@@ -292,8 +300,7 @@
 		crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-				<script type="text/javascript" src="{% static "utils.js" %}"></script>
-
+		<script type="text/javascript" src="{% static "utils.js" %}"></script>
 		<script type="text/javascript" src="{% static "dashboard.js" %}"></script>
 		<script type="text/javascript" src="{% static "expense.js" %}"></script>
 	</body>
