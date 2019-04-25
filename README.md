@@ -25,3 +25,13 @@ To run the project, Go to the root folder and run
         $ python manage.py runserver
         
     
+## Usage
+
+For the Demo purpose:
+
+        username: demo
+        password: demo
+        
+        
+        
+        
