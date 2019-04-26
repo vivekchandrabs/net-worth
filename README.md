@@ -1,6 +1,6 @@
-# Net worth
+# Rev-Exp
 
-Networth is a cash flow management system which helps to keep a track of daily expenses and gives a graphical report of the expenses according to each month and also year.
+Rev-Exp is a cash flow management system which helps to keep a track of daily expenses and gives a graphical report of the expenses according to each month and also year.
 
 The project is constructed into two Django Apps
 
@@ -20,7 +20,7 @@ To install all dependencies, create a new virutalenv with your preferred plugin 
     
         $ pip install -r requirements.txt
 
-To run the project, Go to the root folder and run
+To run the project, Go to the root folder where the manage.py file is there and run the following command:
 
         $ python manage.py runserver
         
@@ -32,6 +32,10 @@ For the Demo purpose:
         username: demo
         password: demo
         
+## Website
+
+This webapp is hosted and can be accessed using the link below:
         
+        https://revexp.herokuapp.com/
         
         
