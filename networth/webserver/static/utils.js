@@ -17,7 +17,6 @@ function drawAllExpenseChart() {
         },
         success: function(response) {
             console.log(response);
-            console.log("jsbfksdbfsdbfjsbfsdbfjsdbfjdsbfjhsdfjhbjh")
             var myPieChart = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
