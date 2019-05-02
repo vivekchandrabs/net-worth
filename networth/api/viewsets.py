@@ -317,11 +317,16 @@ class TableDataViewSet(viewsets.ModelViewSet):
 	This viewset returns data for the table in the dash board.
 	:method:GET
 	'''
+
 	permission_classes = (IsAuthenticated,)
-	queryset = Expense.objects.all()
 	serializer_class = ExpenseSerializer
 
+	def list(self, request):
 
+		user = request.user
+		expense = Expense.objects.filter(user = user)
+
+		return Response(expense)
 
 
 
