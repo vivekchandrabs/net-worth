@@ -321,12 +321,12 @@ class TableDataViewSet(viewsets.ModelViewSet):
 	permission_classes = (IsAuthenticated,)
 	serializer_class = ExpenseSerializer
 
-	def list(self, request):
+	def get_queryset(self):
 
-		user = request.user
+
+		user = self.request.user
 		expense = Expense.objects.filter(user = user)
-
-		return Response(expense)
+		return expense
 
 
 
