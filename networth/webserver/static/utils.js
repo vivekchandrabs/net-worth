@@ -92,16 +92,17 @@ function drawExpenseTable() {
             xhr.setRequestHeader("Authorization", "Token " + window.localStorage["token"]);
         },
         success: function(response) {
-            console.log(response);
-            for (let i of response)
+            for (let i of response){
                 $("#expense_table").append(`
           <tr scope="row">            
             <td>${i.categories.title}</td>
             <td>${i.title}</td>
+            <td>${i.timestamp}</td>
             <td>${i.description}</td>
             <td>${i.cost}</td>
           </tr>
         `)
+        }
         }
     });
 }
