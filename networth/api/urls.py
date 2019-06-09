@@ -14,6 +14,7 @@ router.register(r'allmonthincome',AllMonthIncomeViewSet,base_name="AllMonthExpen
 router.register(r'barchartinc',BarChartIncomeViewSet,base_name='BarChartIncome')
 router.register(r'barchartexp',BarChartExpenseViewSet,base_name='BarChartIncome')
 router.register(r'tabledata',TableDataViewSet, base_name="TableData")
+router.register(r'incomedata',IncomeTableViewSet, base_name="IncomeTable")
 
 urlpatterns = [
 	
