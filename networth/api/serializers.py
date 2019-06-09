@@ -22,7 +22,7 @@ class IncomeSerializer(serializers.ModelSerializer):
 	class Meta:
 
 		model = Income
-		fields = ('id','categories', 'title', 'description', 'money')
+		fields = ('id','categories', 'title', 'timestamp', 'description', 'money')
 		depth = 1
 
 class AllMonthSerializer(serializers.Serializer):
