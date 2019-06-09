@@ -322,14 +322,22 @@ class TableDataViewSet(viewsets.ModelViewSet):
 	serializer_class = ExpenseSerializer
 
 	def get_queryset(self):
+		
+		user = self.request.user
+		expense = Expense.objects.filter(user = user).order_by('-timestamp')
+		
+		return expense
+class IncomeTableViewSet(viewsets.ModelViewSet):
 
+	premission_classes = (IsAuthenticated,)
+	serializer_class = IncomeSerializer
+
+	def get_queryset(self):
 
 		user = self.request.user
-		expense = Expense.objects.filter(user = user)
-		return expense
+		income = Income.objects.filter(user = user).order_by("-timestamp")
 
-
-
+		return income
 
 
 
