@@ -1,3 +1,5 @@
+var d1 = new Date();
+
 let colors = ["#e74c3c","#3498db","#2ecc71","#3498db","#f1c40f","#4834d4","#130f40","#95afc0","#f0932b"]
 function checkAuth() {
     if (!window.localStorage['token']) {
@@ -92,20 +94,50 @@ function drawExpenseTable() {
             xhr.setRequestHeader("Authorization", "Token " + window.localStorage["token"]);
         },
         success: function(response) {
+
             for (let i of response){
-                $("#expense_table").append(`
-          <tr scope="row">            
-            <td>${i.categories.title}</td>
-            <td>${i.title}</td>
-            <td>${i.timestamp}</td>
-            <td>${i.description}</td>
-            <td>${i.cost}</td>
-          </tr>
-        `)
+               
+                        $("#expense_table").append(`
+                        <tr scope="row">            
+                        <td>${i.categories.title}</td>
+                        <td>${i.title}</td>
+                        <td>${i.timestamp}</td> 
+                        <td>₹${i.cost}</td>
+                        </tr>
+                        `)           
         }
         }
     });
 }
+
+function drawIncomeTable()
+{   
+    
+    $("#income_table").empty();
+    $.ajax({
+        method: "GET",
+        url: "/api/incomedata/",
+        beforeSend: function(xhr){
+            xhr.setRequestHeader("Authorization", "Token " + window.localStorage["token"]);
+        },
+        success: function(response){
+            for (let i of response)
+            {
+                $("#income_table").append(`
+                     <tr scope="row">            
+                        <td>${i.categories.title}</td>
+                        <td>${i.title}</td>
+                        <td>${i.timestamp}</td> 
+                        <td>₹${i.money}</td>
+                        </tr>
+                    `)
+            }
+        }
+
+    })
+}
+
+
 
 function drawIncomeChart(){
   var ctx = $('#ExpBar');
