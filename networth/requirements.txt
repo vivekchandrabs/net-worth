@@ -6,7 +6,7 @@ Django==2.1
 django-heroku==0.3.1
 djangorestframework==3.9.2
 gunicorn==19.9.0
-httpie==1.0.2
+httpie==3.1.0
 idna==2.8
 psycopg2==2.8.2
 Pygments==2.3.1
